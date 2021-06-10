@@ -1,0 +1,61 @@
+<?php
+session_start();
+$conect = include("../../../assets/banco/conection.php");
+
+//VERIFICA SE A VARIAVEL EXISTE
+/*if (empty($_POST['usuario']) || empty($_POST['senha'])) {
+	$_SESSION['erro_values'] = true;
+	header('location: login-page.php');
+	exit();
+}*/
+
+
+var_dump($conect);
+
+//RESGATA O USUÁRIO E SENHA COM O MÉODO POST E GUARDA NAS VARIÁVEIS
+$usuario = mysqli_real_escape_string($conect, $_POST['usuario']);
+$senha = mysqli_real_escape_string($conect, $_POST['senha']);
+
+// QUERY DO LOGIN
+$query_login = "SELECT usuario, senha FROM usuarios WHERE usuario = '{$usuario}' AND senha = md5('{$senha}')";
+//RESGATA O RESULTADO DA QUERY NA VARIAVEL
+$result_login = mysqli_query($conect, $query_login);
+//CRIAMOS UMA VARIAVEL LINHA QUE RECEBE VALOR BOOLEAN
+$row_login = mysqli_num_rows($result_login);
+
+// QUERY QUE RESGATA O ID DO LUSUÁRIO
+$query_id_user = "SELECT id FROM usuarios ";
+// WHERE usuario = '{$usuario}' AND senha = md5('{$senha}') ";
+// RESULTADO DA QUERY
+$result_id_user = mysqli_query($conect, $query_id_user);
+// RESGATA A INFORMAÇÃO DA QUERY
+$dado = mysqli_fetch_assoc($result_id_user);
+
+// LINHA DO RESULTADO
+$row_id_user = mysqli_num_rows($result_id_user);
+
+
+
+
+// REDIRECIONAMENTO DO USUÁRIO
+if ($row_login == 1) {
+
+	if ($usuario == 'adm@cavabar.com') {
+		header('location:adm/index.php ');
+		exit();
+	} else {
+		$_SESSION['usuario'] = $usuario;
+		$_SESSION['id']	     = $dado['id'];
+		$_SESSION['logado']  = true;
+		header('location: ../../agendar');
+		exit();
+	}
+}
+// SE FOR FALSE(0)RETORNA PARA O INDEX
+else {
+	unset($_SESSION['erro_values']);
+	$_SESSION['nao_autenticado'] = true;
+	header('location: ../login-page.php');
+	exit();
+}
+session_destroy();

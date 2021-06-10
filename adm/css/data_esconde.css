@@ -1,0 +1,26 @@
+#no-spin::-webkit-inner-spin-button {-webkit-appearance: none;}
+
+input[type="date"] {
+position: relative;
+padding: 4px;
+}
+    
+input[type="date"]::-webkit-calendar-picker-indicator {
+color: transparent;
+background: block;
+z-index: 1;
+}
+
+/* input[type="date"]:before {
+color: transparent;
+background: none;
+display: block;
+font-family: 'FontAwesome';
+content: '\f073';
+width: 15px;
+height: 20px;
+position: absolute;
+top: 7px;
+right: 6px;
+color: #999;
+} */

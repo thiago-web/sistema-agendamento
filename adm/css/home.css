@@ -1,0 +1,131 @@
+@charset "utf-8";
+body{
+    text-align: center;
+    background-image :linear-gradient(to left, #dddddd, #7ca2eb);
+
+}
+div{
+  text-align: center;
+}
+div#formulario{
+
+    text-align: center;
+    height: auto;
+    width: 450px;
+    background-color: rgb(230, 230, 230);
+    position: relative;
+    right: auto;
+    left: 460px;
+    top: 5px; 
+    margin-top: 0px;
+    padding: 15px;
+    border-top: 0px;
+    border-left:0px ;
+    border-right:0px ;
+    border-bottom: 0px ;
+    border-radius:20px ;
+
+
+} 
+
+select{
+
+    padding: 5px 5px;
+    color: 0px;
+    font-size: 13px;  
+    border: 1px solid ;   
+    -webkit-border-radius: 3px;
+    border-radius: 4px;
+}
+
+label{color:black;position: relative;font-family:monospace;}
+
+input {outline:none;
+ 
+}
+ 
+input{
+  width: 90%;
+  margin-top: 4px;
+  padding: 10px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  border-bottom: 2px solid;
+  background:transparent;
+  
+}
+ 
+/*estilo do botão submit */
+input[type="submit"] {
+	font-family:Montserrat,sans-serif;
+  width: 30%;
+  text-align:center;
+  background: #3182d8;
+  padding: 5px 5px;
+  color: #fff;
+  font-size: 15px;  
+  border: 0px solid #fff;   
+  margin-bottom: 10px;  
+  text-shadow: 0 1px 1px #333;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  
+}
+ 
+
+/*
+.link{
+
+  font-family:Montserrat,sans-serif;
+  transition: inherit;
+  background:#267bd6;
+  margin:auto;
+  left: 0px;
+  width: 50%;
+  padding: 8px 5px;
+  font-size: 20px;
+  text-align: center;
+  border-top: 1px solid #1961AE;
+  -webkit-border-radius: 0 0  5px 5px;
+  border-radius: 0 0  5px 5px;
+}
+ 
+.link a {
+	font-family:Montserrat,sans-serif;
+  color: inherit; 
+  text-decoration:none;
+  transition: inherit;
+  width: 50%;
+  font-size:20px;
+  padding: 6px;
+  color: #fff;
+  margin-left: 10px;
+
+}*/
+nav, ul, li {
+	color: inherit;
+	font-size: 20px;
+	font: Montserrat,sans-serif;
+	display: inline;
+  padding:0px;
+  margin:0px;
+  /*background-color:;*/
+  list-style:none;
+  color: black;
+  text-decoration: none;
+    
+}
+a{
+	color: inherit;
+	font-size: 20px;
+	font: monospace;
+	display: inline;
+  padding:0px;
+  margin:0px;
+    /*background-color:;
+    list-style:;*/
+    color: black;
+    text-decoration: none;
+    /*border-bottom: ; */
+}

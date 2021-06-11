@@ -43,6 +43,27 @@
           <script src="script/mascaras.js"></script>
         </head>
         <body>
+          <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- navbar  navbar-light bg-light -->
+              <!-- <a class="navbar-brand" href="index.php" target="blank">lPágina Inicia</a> -->
+              <a class="navbar-brand-light " href="http://teleson.net.br/" target="blank">
+                <img src="img/download.ico" width="50" height="50" class="d-inline-block " alt="">
+                    Barbearia Cavalheiros
+                </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  </div>
+                      <button class = "btn btn-success" onclick = "window.location.href = '../../assets/banco/logout.php'" > Sair
+                      </button>
+                  </div>
+                </ul>
+              </div>
+            </nav>
+          </div>
           <div class = "container text-center">
             <div class = "container text-center">
                   <h1 class = "display-2">

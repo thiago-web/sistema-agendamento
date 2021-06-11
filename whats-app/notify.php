@@ -1,29 +1,56 @@
 <?php 
+session_start();
+$user_id_session = $_SESSION['id'];
+
 // Estabele a conexão com o banco
-include('conexao.php');
+include('../assets/banco/conection.php');
+// Recebe os dados do cliente 
+$sql_dados_cliente        = "SELECT id, nome, email, telefone FROM informacoes_usuarios WHERE id = '$user_id_session' " ;
+$result_sql_dados_cliente = mysqli_query($conect, $sql_dados_cliente);
+$dados_cliente = mysqli_fetch_assoc($result_sql_dados_cliente);
+
+// Recebe os dados de agendamento
+$sql_horarios_age = "SELECT nome, data_cad, horario 
+					FROM horarios_cadastrados 
+					WHERE id_usuario = '$user_id_session' ";
+$result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
+$dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
 
 // Cria as variáveis
-$nome       = $_POST['nome'];
-$email      = $_POST['email'];
-$whats_num = $_POST['num_whats'];
-$whats_web  = $_POST['num_whats'];
+$nome_usuario  = $dados_cliente['nome'];
+$email         = $dados_cliente['email'];
+$whats_num     = $dados_cliente['telefone'];
+echo($whats_num);
+$whats_num     = implode("(",array_reverse(explode("",$whats_num)));
+echo($whats_num);
+$nome_cliente  = $dados_horarios['nome'];
+$data_agendada = $dados_horarios['data_cad'];
+$data_agendada = implode("/",array_reverse(explode("-",$data_agendada)));
+$hora_agendada = $dados_horarios['horario'];
+$hora_agendada = date("H:i", strtotime($hora_agendada));
 $data       = date('d/m/Y');
+
 $a0 = "<a href='";
 $a1 = 'https://api.whatsapp.com/send/?phone=';
 $a2 = "'>";
 $a3 = "Chamar no WhatsApp</a>";
 
 //Variáveis de Saudação e Despedida
-$saudacao  = array("Olá, tudo bem ?", "Olá, como vai você ?", "Olá, tudo certo por ai ?");
-$despedida = array("Nossa Equipe agradece a preferêcia!", "A gente se vê, abraços !", "Estamos à disposição, abraços !");
+$saudacao  = ("Olá, tudo bem ?");
+
+$mensagem = ("
+
+	<br><br><br>Somos da Barbearia Cavalheiros , no endereço do estabelecimento. E é um prazer lembrá-lo de seu horário agendado para dia: ".$data_agendada ." às ". $hora_agendada."! Se precisar reagendar sua visita, ligue para [TELEFONE].");
+
+$despedida = ("<br>Nossa Equipe agradece a preferêcia!");
 
 //Sorteia a mensagem de Saudação
-$apimsgsaudacao = $saudacao[array_rand($saudacao)];
-//Sorteia a mensagem de Despedida
-$apimsgdespedida = $despedida[array_rand($despedida)];
+// $apimsgsaudacao = $saudacao[array_rand($saudacao)];
+// //Sorteia a mensagem de Despedida
+// $apimsgdespedida = $despedida[array_rand($despedida)];
 
 //Faz a mensagem
-$apimsg = $apimsgsaudacao . $nome . ', sua incrição foi confirmada!!'. $apimsgdespedida;
+$apimsg = $saudacao ;
 
 //Dispara a mensagem da API
 $url = 'https://whats-apping.herokuapp.com/send-message';
@@ -40,5 +67,5 @@ $options = array('http' => array(
 	$context  = stream_context_create($options);
 	$result = file_get_contents($url, false, $context);
 	if ($result === FALSE) { /* Handle error */ }
-	//var_dump($result);
+	var_dump($result);
 ?>

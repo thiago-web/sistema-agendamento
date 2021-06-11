@@ -43,12 +43,11 @@
 
 
     if($result){
-        echo("deu bom");
        ?>
        
-       <!-- <script>
-        window.location.assign('aviso-agendado.php');
-       </script> -->
+       <script>
+        window.location.assign('../../whats-app/notify.php');
+       </script>
        <?php
     }
     else{

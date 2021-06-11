@@ -16,7 +16,7 @@ $num        = $_POST['numero-cliente'];
 $email 		= $_POST['user-email'];
 $senha      = $_POST['pass-cliente'];
 $senha      = md5($senha);
-
+// SQL CONSULTA 
 $consulta = "SELECT cpf FROM informacoes_usuarios WHERE cpf = '$cpf' ";
 $resultado_consulta = mysqli_query($conect, $consulta);
 
@@ -41,7 +41,7 @@ else {
 	// VERIFICA SE JÁ EXISTE O USUÁRIO CADASTRADO
 	$verifica_id = "SELECT id_usuario, usuario FROM usuarios 
                     WHERE id_usuario IN (SELECT id_usuario FROM informacoes_usuarios)
-                    AND usuario = '$email')";
+                    AND usuario = '$email'";
 	$result_verifica_id = mysqli_query($conect, $verifica_id );
 
 	if($result_verifica_id){
@@ -76,7 +76,7 @@ else {
 		$result_cadastra_usuario = mysqli_query($conect, $cadastra_usuario);
 
 		if ($result_cadastra_usuario ) {
-			echo "atualizou os usuarios";
+			
 		}
 		else
 		{
@@ -92,7 +92,7 @@ else {
 		?>
 		<script type="text/javascript">
 			alert('Informações cadastradas!');
-			// window.location.href = "../login-page.php";
+			window.location.href = "../login-page.php";
 		</script>
 		<?php
 	}

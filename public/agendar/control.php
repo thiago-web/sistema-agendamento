@@ -55,9 +55,9 @@
         ?>
 
     
-       <!-- <script>
-        window.location.assign('aviso-nao-agendado.php');
-       </script> -->
+       <script>
+        window.location.assign('../avisos/aviso-nao-agendado.php');
+       </script>
        <?php
     }
 

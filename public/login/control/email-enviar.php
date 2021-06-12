@@ -2,12 +2,18 @@
 session_start();
 include('../../../assets/banco/conection.php');
 $id_user     = '1';//$_SESSION['id'] = '1';
-$nome_sql    = "SELECT nome FROM informacoes_usuarios WHERE id_usuario = '$id_user'";
+$nome_sql    = "SELECT nome FROM informacoes_usuarios WHERE id = '$id_user'";
 $result_nome = mysqli_query($conect, $nome_sql);
 $nome        = mysqli_fetch_assoc($result_nome);
-
-echo $nome['nome'];
-
+$nome        = $nome['nome'];
+$numeros = range(0, 9);
+shuffle($numeros);
+$id = array_slice($numeros, 1, 9);
+$mult = "";
+for ($i = 0; $i < 9; $i++) {
+    $mult .= $id[$i];
+}
+echo($mult);
 // Emails para quem será enviado o formulário
 
 $emailenviar  = 'thiagop291@gmail.com'; //= $_POST['email-cliente']

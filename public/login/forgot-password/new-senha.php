@@ -49,13 +49,13 @@
         </div>
       </form>
 
-      <!-- <p class="mt-3 mb-1">
+      <p class="mt-3 mb-1">
         <a href="login-page.php">Entrar</a>
       </p>
-      <p class="mb-0">
+      <!-- <p class="mb-0">
         <a href="register-page.php" class="text-center">Criar um nova conta</a>
-      </p> -->
-    </div>
+      </p>
+    </div> -->
     <!-- /.login-card-body -->
   </div>
 </div>
@@ -87,12 +87,20 @@ confirm_password.onkeyup = validatePassword;
 session_start();
 // Recebe a variável da session
 $id_usuario = $_SESSION['id'];
-
+echo ($id_usuario);
+if(isset($confirm_new_senha)){
 // Declara as variáveis
 $new_senha = $_POST['password'];
 $confirm_new_senha = $_POST['confirm_password'];
+$confirm_new_senha = md5($confirm_new_senha);
 
 // Faz o update da senha
-$sql_update = 
+$sql_update = "UPDATE usuarios SET senha = '$confirm_new_senha' WHERE id_usuario = '$id_usuario'";
+$result_up  = mysqli_query($conect, $sql_update);
+
+if (!$result_up) {
+  echo "Erro: ". mysqli_error();
+}
+}
 
 ?>

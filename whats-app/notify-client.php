@@ -69,21 +69,34 @@ $apimsg = $saudacao ."
 ". $despedida  ;
 //Dispara a mensagem da API
 $url = 'https://whats-apping.herokuapp.com/send-message';
+<<<<<<< HEAD
 $data = array('number' => '55' . $whats_num, 'message' => $apimsg);
+=======
+$data1 = array('number' => '55' . $whats_num, 'message' => $apimsg);
+>>>>>>> 4036d5f779d5916bab4e4a645e696e3060e92a8d
 // Use a chave 'http' mesmo sem enviar a solicitação para https: // ...
 $options = array('http' => array(
 			'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
 			'method'  => 'POST',
 			'content' => http_build_query($data),
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4036d5f779d5916bab4e4a645e696e3060e92a8d
 			'timeout' => 10 //10 segundos mata o processo se a API estiver offline
 		)
 	);
 	$context  = stream_context_create($options);
 	$result = file_get_contents($url, false, $context);
 	if ($result === FALSE) { /* Handle error */ }
+<<<<<<< HEAD
 	// var_dump($result);
 
 	header('location: ../public/avisos/aviso-agendado.php');
 	
+=======
+	var_dump($result);
+
+	header('location: ../public/avisos/aviso-agendado.php');
+>>>>>>> 4036d5f779d5916bab4e4a645e696e3060e92a8d
 ?>

@@ -44,9 +44,9 @@
       <p class="mt-3 mb-1">
         <a href="login-page.php">Entrar</a>
       </p>
-      <p class="mb-0">
+      <!-- <p class="mb-0">
         <a href="register-page.php" class="text-center">Criar um nova conta</a>
-      </p>
+      </p> -->
     </div>
     <!-- /.login-card-body -->
   </div>

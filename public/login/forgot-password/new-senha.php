@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,15 +43,15 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Solicitar Nova Senha</button>
+            <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <p class="mt-3 mb-1">
+      <!-- <p class="mt-3 mb-1">
         <a href="login-page.php">Entrar</a>
-      </p>
+      </p> -->
       <!-- <p class="mb-0">
         <a href="register-page.php" class="text-center">Criar um nova conta</a>
       </p>
@@ -71,7 +71,6 @@ function validatePassword(){
     confirm_password.setCustomValidity('');
   }
 }
-
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 </script>
@@ -86,11 +85,10 @@ confirm_password.onkeyup = validatePassword;
 <?php 
 session_start();
 // Recebe a variável da session
-$id_usuario = $_SESSION['id'];
-echo ($id_usuario);
+$id_usuario        = $_SESSION['id'];
 if(isset($confirm_new_senha)){
 // Declara as variáveis
-$new_senha = $_POST['password'];
+$new_senha         = $_POST['password'];
 $confirm_new_senha = $_POST['confirm_password'];
 $confirm_new_senha = md5($confirm_new_senha);
 
@@ -98,9 +96,12 @@ $confirm_new_senha = md5($confirm_new_senha);
 $sql_update = "UPDATE usuarios SET senha = '$confirm_new_senha' WHERE id_usuario = '$id_usuario'";
 $result_up  = mysqli_query($conect, $sql_update);
 
-if (!$result_up) {
-  echo "Erro: ". mysqli_error();
+  if (!$result_up) {
+    echo "Erro: ". mysqli_error();
+  }
+  else{
+    header('location:../login-page.php');
+  }
 }
-}
-
+session_destroy();
 ?>

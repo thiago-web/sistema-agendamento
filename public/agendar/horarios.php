@@ -82,7 +82,7 @@
                     <label for=""> Horários Disponíveis</label>
                     <select class = "form-control text-center" name="horario" id="">
                       <?php do{ ?>
-                      <option class = "" value="<?php echo $linha['id']; ?>"><?php  echo date('s:i', $linha['horario']); ?></option>
+                      <option class = "" value="<?php echo $linha['id']; ?>"><?php  echo (date('s:i', $linha['horario'])); ?></option>
                       <?php }while($linha = $conexao = mysqli_fetch_assoc($result_query)) ?>
                     </select>
                   </div>
@@ -110,7 +110,7 @@ else{
   ?>
     <script>
     alert('NÃO POSSUÍMOS MAIS HORÁRIOS PARA ESTE DIA !');
-    history.go(-1);
+    window.history.go(-1);
     </script>
       
     <?php  
@@ -122,6 +122,7 @@ else{
     //   }while($linha =  mysqli_fetch_assoc($result_query));
     // }  
 }
+session_destroy();
 ?>
       
 

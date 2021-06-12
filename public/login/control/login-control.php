@@ -2,16 +2,6 @@
 session_start();
 $conect = include("../../../assets/banco/conection.php");
 
-//VERIFICA SE A VARIAVEL EXISTE
-/*if (empty($_POST['usuario']) || empty($_POST['senha'])) {
-	$_SESSION['erro_values'] = true;
-	header('location: login-page.php');
-	exit();
-}*/
-
-
-// var_dump($conect);
-
 //RESGATA O USUÁRIO E SENHA COM O MÉODO POST E GUARDA NAS VARIÁVEIS
 $usuario = $_POST['usuario'];
 $senha   = $_POST['senha'];
@@ -24,8 +14,8 @@ $result_login = mysqli_query($conect, $query_login);
 $row_login = mysqli_num_rows($result_login);
 
 // QUERY QUE RESGATA O ID DO LUSUÁRIO
-$query_id_user = "SELECT id_usuario FROM usuarios 
-                    WHERE usuario = '$usuario'";
+$query_id_user = "SELECT id_usuario, id_empresa FROM usuarios 
+                  WHERE usuario = '$usuario'";
 // WHERE usuario = '{$usuario}' AND senha = md5('{$senha}') ";
 // RESULTADO DA QUERY
 $result_id_user = mysqli_query($conect, $query_id_user);
@@ -41,9 +31,10 @@ if ($row_login == 1) {
 		header('location:adm/index.php ');
 		exit();
 	} else {
-		$_SESSION['usuario'] = $usuario;
-		$_SESSION['id']	     = $dado['id_usuario'];
-		$_SESSION['logado']  = true;
+		$_SESSION['usuario']     = $usuario;
+		$_SESSION['id']	         = $dado['id_usuario'];
+		$_SESSION['id_empresa']	 = $dado['id_empresa'];
+		$_SESSION['logado']      = true;
 		header('location: ../../agendar');
 		exit();
 	}

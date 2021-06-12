@@ -53,13 +53,11 @@
     else{
         echo("Erro: ". mysqli_error($conect));
         ?>
-
-    
        <script>
         window.location.assign('../avisos/aviso-nao-agendado.php');
        </script>
        <?php
     }
 
-
+session_destroy();
 ?>

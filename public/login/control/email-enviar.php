@@ -1,16 +1,23 @@
 <?php
-//enviar
+session_start();
+include('../../../assets/banco/conection.php');
+$id_user     = '1';//$_SESSION['id'] = '1';
+$nome_sql    = "SELECT nome FROM informacoes_usuarios WHERE id_usuario = '$id_user'";
+$result_nome = mysqli_query($conect, $nome_sql);
+$nome        = mysqli_fetch_assoc($result_nome);
 
-// emails para quem será enviado o formulário
+echo $nome['nome'];
 
-$emailenviar = $_POST['email-cliente'];
+// Emails para quem será enviado o formulário
+
+$emailenviar  = 'thiagop291@gmail.com'; //= $_POST['email-cliente']
 $destino = $emailenviar;
-$assunto = "Redefinir a Senha";
+$assunto = "REDEFINIR A SENHA";
 
 // É necessário indicar que o formato do e-mail é html
 $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-    $headers .= 'From: $nome <$email>';
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= 'From: $nome <$email>';
 //$headers .= "Bcc: $EmailPadrao\r\n";
 
 $enviaremail = mail($destino, $assunto, $arquivo, $headers);

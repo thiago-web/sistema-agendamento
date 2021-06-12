@@ -11,27 +11,27 @@
 
     // 1 - 08:00:00
     if($horario == 1){
-        $horario = '08:00:00';
+        $horario = '08:00';
     }
     // 2 - 10:00:00
     if($horario == 2){
-        $horario = '10:00:00';
+        $horario = '10:00';
     }
     // 3 - 12:00:00
     if($horario == 3){
-        $horario = '12:00:00';
+        $horario = '12:00';
     }
     // 4 - 14:00:00
     if($horario == 4){
-        $horario = '14:00:00';
+        $horario = '14:00';
     }
     // 5 - 16:00:00
     if($horario == 5){
-        $horario = '16:00:00';
+        $horario = '16:00';
     }
     // 6 - 18:00:00
     if($horario == 6){
-        $horario = '18:00:00';
+        $horario = '18:00';
     }
 
     // INSERE OS DADOS DE AGENDAMENTO NO BANCO DE DADOS

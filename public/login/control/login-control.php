@@ -10,11 +10,11 @@ $conect = include("../../../assets/banco/conection.php");
 }*/
 
 
-var_dump($conect);
+// var_dump($conect);
 
 //RESGATA O USUÁRIO E SENHA COM O MÉODO POST E GUARDA NAS VARIÁVEIS
-$usuario = mysqli_real_escape_string($conect, $_POST['usuario']);
-$senha = mysqli_real_escape_string($conect, $_POST['senha']);
+$usuario = $_POST['usuario'];
+$senha   = $_POST['senha'];
 
 // QUERY DO LOGIN
 $query_login = "SELECT usuario, senha FROM usuarios WHERE usuario = '{$usuario}' AND senha = md5('{$senha}')";
@@ -24,18 +24,15 @@ $result_login = mysqli_query($conect, $query_login);
 $row_login = mysqli_num_rows($result_login);
 
 // QUERY QUE RESGATA O ID DO LUSUÁRIO
-$query_id_user = "SELECT id FROM usuarios ";
+$query_id_user = "SELECT id_usuario FROM usuarios 
+                    WHERE usuario = '$usuario'";
 // WHERE usuario = '{$usuario}' AND senha = md5('{$senha}') ";
 // RESULTADO DA QUERY
 $result_id_user = mysqli_query($conect, $query_id_user);
 // RESGATA A INFORMAÇÃO DA QUERY
 $dado = mysqli_fetch_assoc($result_id_user);
-
 // LINHA DO RESULTADO
 $row_id_user = mysqli_num_rows($result_id_user);
-
-
-
 
 // REDIRECIONAMENTO DO USUÁRIO
 if ($row_login == 1) {
@@ -45,7 +42,7 @@ if ($row_login == 1) {
 		exit();
 	} else {
 		$_SESSION['usuario'] = $usuario;
-		$_SESSION['id']	     = $dado['id'];
+		$_SESSION['id']	     = $dado['id_usuario'];
 		$_SESSION['logado']  = true;
 		header('location: ../../agendar');
 		exit();
@@ -59,3 +56,4 @@ else {
 	exit();
 }
 session_destroy();
+?>

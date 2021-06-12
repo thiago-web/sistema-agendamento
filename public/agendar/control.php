@@ -46,7 +46,7 @@
        ?>
        
        <script>
-        window.location.assign('../../whats-app/notify.php');
+        window.location.assign('../../whats-app/notify-client.php');
        </script>
        <?php
     }

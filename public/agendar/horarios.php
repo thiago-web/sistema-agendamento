@@ -82,7 +82,7 @@
                     <label for=""> Horários Disponíveis</label>
                     <select class = "form-control text-center" name="horario" id="">
                       <?php do{ ?>
-                      <option class = "" value="<?php echo $linha['id']; ?>"><?php echo $linha['horario']; ?></option>
+                      <option class = "" value="<?php echo $linha['id']; ?>"><?php  echo date('s:i', $linha['horario']); ?></option>
                       <?php }while($linha = $conexao = mysqli_fetch_assoc($result_query)) ?>
                     </select>
                   </div>

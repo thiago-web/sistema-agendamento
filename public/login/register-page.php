@@ -154,7 +154,7 @@
         
       </form>
 
-      <div class="social-auth-links text-center">
+      <!-- <div class="social-auth-links text-center">
         <p>- OU -</p>
         <a href="#" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i>
@@ -164,7 +164,7 @@
           <i class="fab fa-google-plus mr-2"></i>
           Registar usando Google+ <br> (desabilitado)
         </a>
-      </div>
+      </div> -->
 
       <a href="login-page.php" class="text-center">Eu tenho uma conta</a>
     </div>
@@ -174,8 +174,8 @@
 <!-- /.register-box -->
 <!-- Função de Confirmar senha -->
 <script type="text/javascript">
-  var password = document.getElementById("password")
-  , confirm_password = document.getElementById("confirm_password");
+var password = document.getElementById("password")
+, confirm_password = document.getElementById("confirm_password");
 
 function validatePassword(){
   if(password.value != confirm_password.value) {
@@ -187,6 +187,26 @@ function validatePassword(){
 
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
+
+function mascaraData( campo, e )
+{
+	var kC = (document.all) ? event.keyCode : e.keyCode;
+	var data = campo.value;
+	
+	if( kC!=8 && kC!=46 )
+	{
+		if( data.length==2 )
+		{
+			campo.value = data += '/';
+		}
+		else if( data.length==5 )
+		{
+			campo.value = data += '/';
+		}
+		else
+			campo.value = data;
+	}
+}
 </script>
 <!-- jQuery -->
 <script src="../../assets/plugins/jquery/jquery.min.js"></script>

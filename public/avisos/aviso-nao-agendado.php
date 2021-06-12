@@ -11,29 +11,29 @@
     <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="images/ico.ico" type="image/x-icon">
-    
-    
+    <!-- <script>
+        setTimeout(function() {
+        window.location.href = "https://www.facebook.com/cavabarbearia";
+    }, 3000);
+    </script> -->
 </head>
 <style>
     body{
         font-color: white;
         backgroup-color: black;
     }
+    .configdiv 
+    {
+        padding: 200px;
+    }
 </style>
-<body>
-    <div class = "container text-center">  
-    
-    <div class="alert alert-success" role="alert">
-        <h1 class = "alert-heading"> AGENDAMENTO CONCLUÍDO </h1>
-        <hr>
-        <p> Não se esqueça da máscara !</p>    
-    </div>   
-    <script>
-        setTimeout(function() {
-        window.location.href = "https://www.facebook.com/cavabarbearia";
-        }, 3000);
-    </script>
-    <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
-    <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+<body class = "hold-transition login-page">
+    <div class = "container text-center configdiv ">  
+        <div class="alert alert-danger" role="alert">
+            <h1 class = "alert-heading"> ERRO </h1>
+            <hr>
+            <p> Agendamento não conclúido, tente novamente mais tarde !</p>    
+        </div>  
+    </div>    
 </body>
 </html>

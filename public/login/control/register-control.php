@@ -80,14 +80,10 @@ else {
 		}
 		else
 		{
-			echo("Error description: " . mysqli_error($conect));
+			echo("Erro:: " . mysqli_error($conect));
 		}	
 	}
 
-	
-
-						
-	
 	if ($resultado_cadastra ) {
 		?>
 		<script type="text/javascript">

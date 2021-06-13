@@ -135,19 +135,22 @@ text-decoration: none;
   </html>";
 
 $enviaremail = mail($destino, $assunto, $arquivo, $headers);
-if($enviaremail){
-$mgm = "E-MAIL ENVIADO COM SUCESSO! <br> O link será enviado para o e-mail fornecido no formulário";
-// FAZ O INSERT NA TABELA
-$sql_cod = "INSERT INTO id_usuario, codigo VALUES id_usuario = '$id_user' AND codigo = '$codigo'";
+if($enviaremail)
+{
+    $mgm = "E-MAIL ENVIADO COM SUCESSO! <br> O link será enviado para o e-mail fornecido no formulário";
+    // FAZ O INSERT NA TABELA
+    $sql_cod = "INSERT INTO codigos( id_usuario, codigo ) VALUES ('$id_user', '$codigo')";
 
-$result_cod = mysqli_query($conect, $sql_cod);
+    $result_cod = mysqli_query($conect, $sql_cod);
 
-if(!$result_cod){
-    echo("ERRO: Código não inserido <br>");
-    echo('ERRO'. mysqli_error());
-}
-else{}
-header('location:../forgot-password/new-senha.php');
+    if($result_cod){
+        
+    }
+    else{
+        echo("ERRO: Código não inserido <br>");
+        echo('ERRO'. mysqli_error($conect));
+    }
+    header('location:../forgot-password/codigo-senha.php');
 } 
 else {}
 session_destroy();

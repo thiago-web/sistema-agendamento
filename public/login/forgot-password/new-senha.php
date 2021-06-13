@@ -96,12 +96,14 @@ $confirm_new_senha = md5($confirm_new_senha);
 $sql_update = "UPDATE usuarios SET senha = '$confirm_new_senha' WHERE id_usuario = '$id_usuario'";
 $result_up  = mysqli_query($conect, $sql_update);
 
-  if (!$result_up) {
-    echo "Erro: ". mysqli_error();
-  }
-  else{
-    header('location:../login-page.php');
-  }
+if ($result_up) {
+  $sql_del    = "DELETE codigos WHERE id_usuario = '$id_usuario'";
+  $result_del = mysqli_query($conect, $result_del);
+  header('location:../login-page.php');
+}
+else{
+  echo "Erro: ". mysqli_error();
+}
 }
 session_destroy();
 ?>

@@ -3,6 +3,7 @@ session_start();
 
 $email = $_SESSION['email_cliente'];
 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,9 +31,9 @@ $email = $_SESSION['email_cliente'];
     <div class="card-body login-card-body">
       <p class="login-box-msg">Enviamos um código de verificação no seu e-mail:<?php echo ($email) ?></p>
 
-      <form action="codigo-senha.php" method="post">
+      <form action="control/cod_ver.php" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control text-center" name= "codigo"  maxlength = "7" placeholder="Código" id="password" onkeypress ="campo_cod(this, event);">
+          <input type="text" class="form-control text-center" name= "codigo"  maxlength = "9" placeholder="Código" id="password" ">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -87,24 +88,8 @@ function campo_cod( campo, e )
 <script src="../../../assets/js/adminlte.min.js"></script>
 </body>
 </html>
-<?php 
-// Recebe a variável da session
-$id_usuario        = $_SESSION['id'];
-if(isset($codigo_user)){
 
-// Declara as variáveis
-$codigo_user       = $_POST['codigo'];
-
-// Verifica o código enviado
-$sql_codigo = "SELECT id_usuario, codigo FROM codigos WHERE id_usuario = '$id_usuario' AND codigo = '$codigo_user'";
-$result_cod  = mysqli_query($conect, $sql_codigo);
-
-  if (!$result_cod) {
-    echo "Erro: ". mysqli_error();
-  }
-  else{
-    header('location:new-senha.php');
-  }
-}
+<?php
 session_destroy();
+
 ?>

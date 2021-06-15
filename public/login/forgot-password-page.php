@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,13 +40,12 @@
           <!-- /.col -->
         </div>
       </form>
-
       <p class="mt-3 mb-1">
         <a href="login-page.php">Entrar</a>
       </p>
-      <!-- <p class="mb-0">
+      <p class="mb-0">
         <a href="register-page.php" class="text-center">Criar um nova conta</a>
-      </p> -->
+      </p>
     </div>
     <!-- /.login-card-body -->
   </div>

@@ -1,3 +1,7 @@
+<?php 
+session_start();
+$id_user = $_SESSION['id'];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -24,9 +28,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Você esqueceu sua senha? Aqui você pode facilmente recuperar uma nova senha.</p>
 
-      <form action="new-senha.php" method="post">
+      <form action="control/new_senha_control.php" method="post">
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name= "new-password" placeholder="Nova senha" id="password">
+          <input type="password" class="form-control" name= "" placeholder="Nova senha" id="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,7 +38,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name= "new-password-confirm" placeholder="Confirmar nova senha" id = "confirm_password">
+          <input type="password" class="form-control" name= "new_senha" placeholder="Confirmar nova senha" id = "confirm_password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -49,13 +53,13 @@
         </div>
       </form>
 
-      <!-- <p class="mt-3 mb-1">
+      <p class="mt-3 mb-1">
         <a href="login-page.php">Entrar</a>
-      </p> -->
-      <!-- <p class="mb-0">
+      </p>
+      <p class="mb-0">
         <a href="register-page.php" class="text-center">Criar um nova conta</a>
       </p>
-    </div> -->
+    </div>
     <!-- /.login-card-body -->
   </div>
 </div>
@@ -82,28 +86,3 @@ confirm_password.onkeyup = validatePassword;
 <script src="../../../assets/js/adminlte.min.js"></script>
 </body>
 </html>
-<?php 
-session_start();
-// Recebe a variável da session
-$id_usuario        = $_SESSION['id'];
-if(isset($confirm_new_senha)){
-// Declara as variáveis
-$new_senha         = $_POST['password'];
-$confirm_new_senha = $_POST['confirm_password'];
-$confirm_new_senha = md5($confirm_new_senha);
-
-// Faz o update da senha
-$sql_update = "UPDATE usuarios SET senha = '$confirm_new_senha' WHERE id_usuario = '$id_usuario'";
-$result_up  = mysqli_query($conect, $sql_update);
-
-if ($result_up) {
-  $sql_del    = "DELETE codigos WHERE id_usuario = '$id_usuario'";
-  $result_del = mysqli_query($conect, $result_del);
-  header('location:../login-page.php');
-}
-else{
-  echo "Erro: ". mysqli_error();
-}
-}
-session_destroy();
-?>

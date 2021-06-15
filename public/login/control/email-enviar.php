@@ -153,5 +153,4 @@ if($enviaremail)
     header('location:../forgot-password/codigo-senha.php');
 } 
 else {}
-session_destroy();
 ?>

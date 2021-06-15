@@ -1,28 +1,41 @@
 <?php 
 session_start();
 include('../../../../assets/banco/conection.php');
+$id_user = $_SESSION['id'];
 
 // Recebe a variável da session
-$id_usuario        = $_SESSION['id'];
-if(isset($codigo_user)){
+
+
 
 // Declara as variáveis
 $codigo_user       = $_POST['codigo'];
 
+
 // Verifica o código enviado
-$sql_codigo = "SELECT id_usuario, codigo FROM codigos WHERE id_usuario = '$id_usuario' AND codigo = '$codigo_user'";
-$result_cod  = mysqli_query($conect, $sql_codigo);
+$sql_codigo = "SELECT id_usuario, codigo FROM codigos WHERE id_usuario = '$id_user' AND codigo = '$codigo_user'";
+$result_cod = mysqli_query($conect, $sql_codigo);
 
-  if ($result_cod) {
-    
-    header('location:../new-senha.php');
-  }
-  else{
-    
-    echo "Erro: ". mysqli_error();
-  }
+
+$linha = mysqli_num_rows($result_cod);
+
+$dado  = mysqli_fetch_assoc($result_cod);
+// Echos
+
+// echo "<br>ID Session: " . $id_user;
+// echo "<br>Código Post: " . $codigo_user . "<br>";
+// echo "<br>ID Sql: ". $dado['id_usuario'];
+// echo "<br>Código Sql: ". $dado['codigo'];
+// echo "<br>Linha: Sql: " . $linha;
+
+
+if($linha > 0){
+  header('location:../new-senha.php');
+  
+  // echo "<br>Vai para a tela de mudar a senha";
 }
-
-
-sessiopn_destroy();
+else{
+  // echo "<br> Volta para a tela do código";
+  header('location:../codigo-senha.php');
+  $_SESSION['codigo_error'] = false;
+}
 ?>

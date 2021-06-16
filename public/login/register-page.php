@@ -26,6 +26,22 @@
       <p class="login-box-msg">Criar uma nova conta</p>
 
       <form action="control/register-control.php" method="post">
+      <div class="form-group mb-3">
+          <div class="form-group-text">
+            <span class="fa fa-map-marker" aria-hidden="true"> Selecione o estabelecimento</span>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <select name="empresa_id" id="" class = form-control>
+            <option value="1" class = "form-control">Barberia Cavalheiros</option>
+          </select>
+          <!-- <input type="text" class="form-control" placeholder="Nome completo" name ="nome-cliente" required> -->
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fa fa-map-marker" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
         <div class="form-group mb-3">
           <div class="form-group-text">
             <span class="fas fa-info-circle"> Informações Pessoais</span>
@@ -136,7 +152,7 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <div class="icheck-primary">
-                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required >
                 <label for="agreeTerms">
                  Eu concordo com a <a href="#">Politica de Privacidade</a>
                 </label>

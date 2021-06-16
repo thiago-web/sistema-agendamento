@@ -1,6 +1,9 @@
 <?php 
 session_start();
+
+$email   = $_SESSION['email_cliente'];
 $id_user = $_SESSION['id'];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,58 +29,67 @@ $id_user = $_SESSION['id'];
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Você esqueceu sua senha? Aqui você pode facilmente recuperar uma nova senha.</p>
+      <p class="login-box-msg"> Enviamos um código de verificação no seu e-mail: <?php echo ($email) ?></p>
+      
+      <form action="control/cod_ver.php" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control text-center" name= "codigo" minlength = "6" maxlength = "8" placeholder="Código" id="password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <?php
+            if (isset($_SESSION['codigo_error'])) {
+            ?>
+              <div class='alert alert-danger text-center' role='alert'>
+                <p> <strong>Código</strong> invalido. </p>
+              </div>
+            <?php
+            }
 
-      <form action="control/new_senha_control.php" method="post">
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name= "" placeholder="Nova senha" id="password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name= "new_senha" placeholder="Confirmar nova senha" id = "confirm_password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
+            unset($_SESSION['codigo_error']);
+            ?>
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
+            <button type="submit" class="btn btn-primary btn-block">Verificar</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
       <p class="mt-3 mb-1">
-        <a href="login-page.php">Entrar</a>
-      </p>
+        <a href="../login-page.php">Entrar</a>
+      </p> 
       <p class="mb-0">
-        <a href="register-page.php" class="text-center">Criar um nova conta</a>
+        <a href="../register-page.php" class="text-center">Criar um nova conta</a>
       </p>
     </div>
     <!-- /.login-card-body -->
   </div>
 </div>
 <!-- /.login-box -->
-<script type="text/javascript">
-  var password = document.getElementById("password")
-, confirm_password = document.getElementById("confirm_password");
 
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("As senhas não são iguais !");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
-}
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
+
+<!-- Formata o campo do código -->
+<script>
+function campo_cod( campo, e )
+			{
+				var kC = (document.all) ? event.keyCode : e.keyCode;
+				var data = campo.value;
+				
+				if( kC!=8 && kC!=46 )
+				{
+					if( data.length==3 )
+					{
+						campo.value = data += '-';
+					}
+					
+				}
+			}
 </script>
+
 <!-- jQuery -->
 <script src="../../../assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -86,3 +98,7 @@ confirm_password.onkeyup = validatePassword;
 <script src="../../../assets/js/adminlte.min.js"></script>
 </body>
 </html>
+
+<?php
+
+?>

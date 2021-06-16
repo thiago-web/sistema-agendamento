@@ -5,6 +5,7 @@
 
     $nome       = $_SESSION['nome'];
     $id_usuario = $_SESSION['id'];
+    $id_empresa = $_SESSION['id_empresa'];
     $data_dis   = $_SESSION['data_dis'];
     $horario    = $_POST['horario'];
 
@@ -35,8 +36,8 @@
     }
 
     // INSERE OS DADOS DE AGENDAMENTO NO BANCO DE DADOS
-    $sql_insert = " INSERT INTO  horarios_cadastrados (nome, id_usuario, data_cad, horario ) 
-                    VALUES('$nome','$id_usuario','$data_dis', '$horario') ";
+    $sql_insert = " INSERT INTO horarios_cadastrados ( nome, id_usuariO, id_empresa, data_cad, horario) 
+    VALUES ('$nome','$id_usuario','$id_empresa','$data_dis','$horario') ";
     // RESGATA O RESULTADA DA QUERY ACIMA
     $result = mysqli_query($conect, $sql_insert);
     
@@ -46,7 +47,7 @@
        ?>
        
        <script>
-        window.location.assign('../../whats-app/notify-client.php');
+        window.location.assign('../../whats-app/notify.php');
        </script>
        <?php
     }

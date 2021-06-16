@@ -60,8 +60,20 @@
             </div>
           </div>
         </div>
+        <?php
+            
+            if (isset($_SESSION['senha_auterada']) == true) {
+            ?>
+              <div class='alert alert-success text-center' role='alert'>
+                <p> Sua <strong>Senha</strong> foi alterada ! </p>
+              </div>
+            <?php
+            }
+
+            unset($_SESSION['senha_auterada']);
+            session_destroy();
+            ?>
         <div class="row">
-          
           <!-- /.col -->
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>

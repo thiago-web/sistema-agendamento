@@ -4,6 +4,21 @@
     include('../../assets/banco/control-login.php');
 
     $data_dis   = $_POST['data_cliente'];
+
+    $dom = date('w', strtotime($data_dis));
+
+    if($dom == 0){
+      ?>
+    <script>
+      alert('NÃO POSSUÍMOS MAIS HORÁRIOS PARA ESTE DIA !');
+      history.go(-1);
+    </script>
+      
+    <?php  
+
+    }else{
+
+
     
     $_SESSION['data_dis']  = $data_dis;
 
@@ -119,6 +134,7 @@ else{
     //     echo $linha['horario']. ", ";
     //   }while($linha =  mysqli_fetch_assoc($result_query));
     // }  
+}
 }
 ?>
       

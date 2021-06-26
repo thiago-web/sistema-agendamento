@@ -78,13 +78,13 @@
       <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- navbar  navbar-light bg-light -->
           <!-- <a class="navbar-brand" href="index.php" target="blank">lPágina Inicia</a> -->
-          <a class="navbar-brand-light " href="http://teleson.net.br/" target="blank">
-            <img src="img/download.ico" width="50" height="50" class="d-inline-block " alt="">
+          <a class="navbar-brand-light " href="https://www.facebook.com/cavabarbearia" target="blank">
+            <img src="../../assets/images/logo.jpg" width="50" height="50" class="d-inline-block " alt="">
                 Barbearia Cavalheiros
             </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
+          </button> -->
           
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -98,8 +98,8 @@
       </div>
 
       <div class = "container text-center">
-          <h1 class = "display-2">
-           Informações de Contato
+          <h1 class = "display-3">
+           Informações de Agendamento
           </h1>
         </div>
         <br><br>
@@ -108,13 +108,13 @@
           <form method = "POST" action = "horarios.php" id = "form" name = "form" onchange="mySubmit(this.form)">
           <div class = "form-row">
 
-            <div class = "form-group col-md-6">
+           <!--  <div class = "form-group col-md-6">
               <label for="InputNome"> Nome Completo </label>
               <input class = "form-control" type="text" name = "nome_cliente" placeholder = "Digite o seu Nome " required = "required" id = "texto">
-            </div>
+            </div> -->
 
-            <div class = "form-group col-md-6">
-            <label for="InputData"> Disponível no dia: </label>
+            <div class = "form-group col-md-12">
+            <label for="InputData"> Estou disponível no dia: </label>
               <input class = "form-control" type="date" id = "no-spin" onchange = "d()" name = "data_cliente"  required = "required">
             </div>
            

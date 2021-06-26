@@ -38,10 +38,9 @@
                 <p> <strong>Usuário</strong> ou <strong>Senha</strong> está invalido. </p>
               </div>
             <?php
-            }
-
             unset($_SESSION['nao_autenticado']);
             session_destroy();
+            }
             ?>
       <form action="control/login-control.php" method="POST">
         <div class="input-group mb-3">
@@ -68,10 +67,9 @@
                 <p> Sua <strong>Senha</strong> foi alterada ! </p>
               </div>
             <?php
-            }
-
             unset($_SESSION['senha_auterada']);
             session_destroy();
+            }
             ?>
         <div class="row">
           <!-- /.col -->

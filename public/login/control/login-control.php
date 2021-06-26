@@ -46,5 +46,4 @@ else {
 	header('location: ../login-page.php');
 	exit();
 }
-session_destroy();
 ?>

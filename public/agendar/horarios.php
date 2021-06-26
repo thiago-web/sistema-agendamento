@@ -3,10 +3,8 @@
     include('../../assets/banco/conection.php');
     include('../../assets/banco/control-login.php');
 
-    $nome       = $_POST['nome_cliente'];
     $data_dis   = $_POST['data_cliente'];
-
-    $_SESSION['nome']      = $nome;
+    
     $_SESSION['data_dis']  = $data_dis;
 
     $sql = "SELECT p.* FROM (SELECT '$data_dis' data_cad, horario,id FROM horarios_possiveis) p LEFT JOIN horarios_cadastrados c on p.horario=c.horario AND p.data_cad=c.data_cad WHERE c.data_cad is null";
@@ -47,7 +45,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- navbar  navbar-light bg-light -->
               <!-- <a class="navbar-brand" href="index.php" target="blank">lPágina Inicia</a> -->
               <a class="navbar-brand-light " href="http://teleson.net.br/" target="blank">
-                <img src="img/download.ico" width="50" height="50" class="d-inline-block " alt="">
+                <img src="../../assets/images/logo.jpg" width="50" height="50" class="d-inline-block " alt="">
                     Barbearia Cavalheiros
                 </a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +80,7 @@
                     <label for=""> Horários Disponíveis</label>
                     <select class = "form-control text-center" name="horario" id="">
                       <?php do{ ?>
-                      <option class = "" value="<?php echo $linha['id']; ?>"><?php  echo (date('s:i', $linha['horario'])); ?></option>
+                      <option class = "" value="<?php echo $linha['id']; ?>"><?php  echo date('s:i', $linha['horario']); ?></option>
                       <?php }while($linha = $conexao = mysqli_fetch_assoc($result_query)) ?>
                     </select>
                   </div>
@@ -110,7 +108,7 @@ else{
   ?>
     <script>
     alert('NÃO POSSUÍMOS MAIS HORÁRIOS PARA ESTE DIA !');
-    window.history.go(-1);
+    history.go(-1);
     </script>
       
     <?php  
@@ -122,7 +120,6 @@ else{
     //   }while($linha =  mysqli_fetch_assoc($result_query));
     // }  
 }
-session_destroy();
 ?>
       
 

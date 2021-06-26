@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,13 +26,13 @@
     }
 </style>
 <body>
-    <div class = "container text-center configdiv">  
-    
-    <div class="alert alert-success" role="alert">
-        <h1 class = "alert-heading"> AGENDAMENTO CONCLUÍDO </h1>
-        <hr>
-        <p> Não se esqueça da máscara !</p>    
-    </div>   
+    <div class = "container text-center ">  
+        <div class="alert alert-success" role="alert">
+            <h1 class = "alert-heading"> AGENDAMENTO CONCLUÍDO </h1>
+            <hr>
+            <p> Não se esqueça da máscara !</p>    
+        </div>   
+    </div>
     <script>
         setTimeout(function() {
         window.location.href = "https://www.facebook.com/cavabarbearia";
@@ -41,3 +42,4 @@
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
 </body>
 </html>
+<?php session_destroy();?>

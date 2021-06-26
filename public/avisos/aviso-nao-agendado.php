@@ -36,4 +36,8 @@
         </div>  
     </div>    
 </body>
+<script>
+    window.location.assign('../login');
+    <?php include('../../assets/banco/logout.php');?>
+</script>
 </html>

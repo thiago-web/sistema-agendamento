@@ -1,9 +1,9 @@
 <?php 
 session_start();
 $user_id_session = $_SESSION['id'];
-$user_id_empresa = $_SESSION['id_empresa'];
-
-
+$user_id_empresa    = $_SESSION['id_empresa'];
+$data_ag_session    = $_SESSION['data_dis'];
+$horario_ag_session = $_SESSION['horario'];
 // Função que limpa o texto
 function limpar_texto($str){ 
 	return preg_replace("/[^0-9]/", "", $str); 
@@ -23,16 +23,21 @@ $sql_dados_cliente        = "SELECT id, nome, email, telefone, cep, cidade, bair
 $result_sql_dados_cliente = mysqli_query($conect, $sql_dados_cliente);
 $dados_cliente = mysqli_fetch_assoc($result_sql_dados_cliente);
 
-// Recebe os dados de agendamento
+// Recebe os dados do agendamento do cliente
 $sql_horarios_age = "SELECT id, nome, data_cad, horario 
 					FROM horarios_cadastrados 
-					WHERE id_usuario = '$user_id_session' ";
+					WHERE 
+					id_usuario = '$user_id_session' 
+					AND data_cad = '$data_ag_session' 
+					AND horario = '$horario_ag_session'";
 $result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
 $dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
+// Informações do agendamento
+ // $cod = "SELECT id FROM horarios_cadastrados WHERE id_usuario = '$user_id_session' AND data_cad = ''"
 
 
 // Informações do agendamento
-$codigo_cliente = $dados_horarios['id'];
+$codigo_cliente = $dados_horarios['id'];echo("COD:". $codigo_cliente."         ");
 $nome_cliente   = $dados_horarios['nome'];
 $data_agendada  = $dados_horarios['data_cad'];
 $data_agendada  = implode("/",array_reverse(explode("-",$data_agendada)));
@@ -70,7 +75,7 @@ $a3 = "Chamar no WhatsApp </a>";
 
 // Variáveis de Saudação, Mensagem e Despedida para o Cliente
 $saudacao_cliente  = ("Olá ". $nome_usuario.", tudo bem ?");
-$mensagem_cliente = ("Somos da Barbearia Cavalheiros , na ".$rua_empresa.",".$num_empresa."- ".
+$mensagem_cliente = ("Somos da ".$nome_empresa." , na ".$rua_empresa.",".$num_empresa."- ".
 $bairro_empresa." na cidade de ".$cidade_empresa.".
 E é um prazer confirmar o seu horário agendado para dia: ".$data_agendada ." às ". $hora_agendada." horas.
 
@@ -88,8 +93,7 @@ $bairro_empresa.", ".$cidade_empresa."
 Se precisar *reagendar/cancelar* sua visita, entre em contato com a empresa no telefone: ".$tel_empresa.".
 
 Ou pelo WhatsApp : 
-https://api.whatsapp.com/send?phone=55".$tel_empresa." .
-");
+https://api.whatsapp.com/send?phone=55".$tel_empresa."&text=Olá,%20preciso%20conversar%20a%20respeito%20do%20meu%20horário%20marcado%20para%20o%20dia%20".$data_agendada."%20às%20".$hora_agendada."%20horas.%20");
 $despedida_cliente = ("Nossa equipe agradece sua a preferêcia!");
 
 //Sorteia a mensagem de Saudação
@@ -109,7 +113,7 @@ $msg_cliente = $saudacao_cliente ."
 $saudacao_empresa  = ("*NOVO AGENDAMENTO*");
 $mensagem_empresa  = ("
 
-Barbearia Cavalheiros , meu nome é ".$nome_usuario." e acabei de realizar um agendamento para o dia: 
+".$nome_empresa.", meu nome é ".$nome_usuario." e acabei de realizar um agendamento para o dia: 
 ".$data_agendada ." às ". $hora_agendada." horas.
 
 
@@ -127,7 +131,7 @@ Se precisar *reagendar/cancelar* a visita, entre em contato com o cliente no tel
 
 
 Ou pelo WhatsApp : 
-https://api.whatsapp.com/send?phone=55".$whats_num." .");
+https://api.whatsapp.com/send?phone=55".$whats_num."&text=Olá,%20preciso%20conversar%20a%20respeito%20do%20meu%20horário%20marcado%20para%20o%20dia%20".$data_agendada."%20às%20".$hora_agendada."%20horas.%20");
 
 
 //Sorteia a mensagem de Saudação
@@ -173,6 +177,6 @@ if ($result_empresa === FALSE) { /* Handle error */ }
 // var_dump($result_cliente);
 // var_dump($result_empresa);
 
-header('location: ../public/avisos/aviso-agendado.php');	
+// header('location: ../public/avisos/aviso-agendado.php');	
 	
 ?>

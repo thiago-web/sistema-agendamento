@@ -13,34 +13,34 @@
     // 1 - 08:00:00
     if($horario == 1){
         $horario = '08:00';
-        $_SESSION['horario'] = $horario;
+        $_SESSION['hh'] = $horario;
     }
     // 2 - 10:00:00
     if($horario == 2){
         $horario = '10:00';
-        $_SESSION['horario'] = $horario;
+        $_SESSION['hh'] = $horario;
     }
     // 3 - 12:00:00
     if($horario == 3){
         $horario = '12:00';
-        $_SESSION['horario'] = $horario;
+        $_SESSION['hh'] = $horario;
     }
     // 4 - 14:00:00
     if($horario == 4){
         $horario = '14:00';
-        $_SESSION['horario'] = $horario;
+        $_SESSION['hh'] = $horario;
     }
     // 5 - 16:00:00
     if($horario == 5){
         $horario = '16:00';
-        $_SESSION['horario'] = $horario;
+        $_SESSION['hh'] = $horario;
     }
     // 6 - 18:00:00
     if($horario == 6){
         $horario = '18:00';
-        $_SESSION['horario'] = $horario;
+        $_SESSION['hh'] = $horario;
     }
-
+    $_SESSION['hh'] = $horario;
 
     // INSERE OS DADOS DE AGENDAMENTO NO BANCO DE DADOS
     $sql_insert = " INSERT INTO horarios_cadastrados (  id_usuario, id_empresa, data_cad, horario) 

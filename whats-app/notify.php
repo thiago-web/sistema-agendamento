@@ -1,9 +1,11 @@
 <?php 
 session_start();
-$user_id_session = $_SESSION['id'];
+// Variáveis da sessão 
+$user_id_session 	= $_SESSION['id'];
 $user_id_empresa    = $_SESSION['id_empresa'];
 $data_ag_session    = $_SESSION['data_dis'];
-$horario_ag_session = $_SESSION['horario'];
+$horario_ag_session = $_SESSION['hh'];
+
 // Função que limpa o texto
 function limpar_texto($str){ 
 	return preg_replace("/[^0-9]/", "", $str); 
@@ -30,6 +32,7 @@ $sql_horarios_age = "SELECT id, nome, data_cad, horario
 					id_usuario = '$user_id_session' 
 					AND data_cad = '$data_ag_session' 
 					AND horario = '$horario_ag_session'";
+
 $result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
 $dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
 // Informações do agendamento
@@ -37,8 +40,7 @@ $dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
 
 
 // Informações do agendamento
-$codigo_cliente = $dados_horarios['id'];echo("COD:". $codigo_cliente."         ");
-$nome_cliente   = $dados_horarios['nome'];
+$codigo_cliente = $dados_horarios['id'];
 $data_agendada  = $dados_horarios['data_cad'];
 $data_agendada  = implode("/",array_reverse(explode("-",$data_agendada)));
 $hora_agendada  = $dados_horarios['horario'];
@@ -82,7 +84,7 @@ E é um prazer confirmar o seu horário agendado para dia: ".$data_agendada ." �
 
 *INFORMAÇÕES DO AGENDAMENTO*
 
-CÓDIGO: ".$codigo_cliente."
+CÓDIGO DE AGENDAMENTO: ".$codigo_cliente."
 NOME: ".$nome_usuario. ",
 DATA AGENDADA: ".$data_agendada."
 HORÁRIO: ".$hora_agendada."
@@ -93,7 +95,7 @@ $bairro_empresa.", ".$cidade_empresa."
 Se precisar *reagendar/cancelar* sua visita, entre em contato com a empresa no telefone: ".$tel_empresa.".
 
 Ou pelo WhatsApp : 
-https://api.whatsapp.com/send?phone=55".$tel_empresa."&text=Olá,%20preciso%20conversar%20a%20respeito%20do%20meu%20horário%20marcado%20para%20o%20dia%20".$data_agendada."%20às%20".$hora_agendada."%20horas.%20");
+https://api.whatsapp.com/send?phone=55".$tel_empresa."&text=Olá,%20preciso%20conversar%20a%20respeito%20do%20seu%20horário%20marcado%20para%20o%20dia%20".$data_agendada."%20às%20".$hora_agendada."%20horas.%20");
 $despedida_cliente = ("Nossa equipe agradece sua a preferêcia!");
 
 //Sorteia a mensagem de Saudação
@@ -177,6 +179,6 @@ if ($result_empresa === FALSE) { /* Handle error */ }
 // var_dump($result_cliente);
 // var_dump($result_empresa);
 
-// header('location: ../public/avisos/aviso-agendado.php');	
+header('location: ../public/avisos/aviso-agendado.php');	
 	
 ?>

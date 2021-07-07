@@ -30,10 +30,13 @@ function telefone($value){
 // Dados do usuário
 $emailenviar                = $_POST['email-cliente'];
 $_SESSION['email_cliente']  = $emailenviar;
-$dados_user                 = "SELECT nome, id, id_empresa FROM informacoes_usuarios WHERE email = '$emailenviar'";
+$dados_user                 = "SELECT nome, id, id_empresa, telefone 
+                               FROM informacoes_usuarios 
+                               WHERE email = '$emailenviar'";
 $result_user                = mysqli_query($conect, $dados_user);
 $user                       = mysqli_fetch_assoc($result_user);
 $nome                       = $user['nome'];
+$tel
 $id_user                    = $user['id'];
 $_SESSION['id']             = $id_user;
 $id_empresa                 = $user['id_empresa'];
@@ -59,7 +62,7 @@ $assunto     = " $nome_empresa | Redefinição de senha";
 $data_envio  = date('d/m/Y');
 $hora_envio  = date('H:i');
 
-
+// Faz a criação do código
 $numeros = range(0, 9);
 shuffle($numeros);
 $id = array_slice($numeros, 1, 6);
@@ -139,7 +142,7 @@ if($enviaremail)
 {
     $mgm = "E-MAIL ENVIADO COM SUCESSO! <br> O link será enviado para o e-mail fornecido no formulário";
     // FAZ O INSERT NA TABELA
-    $sql_cod = "INSERT INTO codigos( id_usuario, codigo ) VALUES ('$id_user', '$codigo')";
+    $sql_cod = "INSERT INTO codigos( email, codigo ) VALUES ('$emailenviar', '$codigo')";
 
     $result_cod = mysqli_query($conect, $sql_cod);
 

@@ -4,9 +4,12 @@
     include('../../assets/banco/control-login.php');
 
     $data_dis   = $_POST['data_cliente'];
+    $barber     = $_POST['barber'];
+
 
     $dom = date('w', strtotime($data_dis));
-
+    
+    
     if($dom == 0){
       ?>
     <script>
@@ -21,6 +24,8 @@
 
     
     $_SESSION['data_dis']  = $data_dis;
+    $_SESSION['barber']    = $barber;
+
 
     $sql = "SELECT p.* FROM (SELECT '$data_dis' data_cad, horario,id FROM horarios_possiveis) p LEFT JOIN horarios_cadastrados c on p.horario=c.horario AND p.data_cad=c.data_cad WHERE c.data_cad is null";
     $result_query = mysqli_query($conect, $sql);
@@ -52,7 +57,9 @@
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
           <link rel="stylesheet" href="css/data_esconde.css">
             <!-- <link rel="stylesheet" type="text/css" href="script/bootstrap.min.css"> -->
-          <link rel="shortcut icon" href="images/ico.ico" type="image/x-icon">
+          
+          <link rel="shortcut icon" href="../../assets/images/ico.ico" type="image/x-icon">
+
           <script src="script/mascaras.js"></script>
         </head>
         <body>
@@ -63,9 +70,9 @@
                 <img src="../../assets/images/logo.jpg" width="50" height="50" class="d-inline-block " alt="">
                     Barbearia Cavalheiros
                 </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
+              </button> -->
               
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
@@ -77,25 +84,36 @@
               </div>
             </nav>
           </div>
-          <div class = "container text-center">
-            <div class = "container text-center">
+          <div class = "container text-center ">
+            <div class = " text-center mb-5">
                   <h1 class = "display-2">
                     Horários Disponíveis
                   </h1>
                 </div>
+              <?php
 
+              if (isset($_SESSION['age_not'])) 
+              {
+                ?>
+                <div class='alert alert-danger text-center' role='alert'>
+                  <p> <strong> Agendamento não concluído</strong> <br> tente novamente. </p>
+                </div>
+              <?php
+                unset($_SESSION['age_not']);
+              }
+              ?>
               <div class = "form">
               <form action="control.php" method="post">
                 <div class = "form-row">
                   <div class = "form-group col-md-6">
                     <label for=""> Data Selecionada </label>
-                    <input readonly class = "form-control text-center" min=""   id = "date" type="text" value = "<?php echo  date('d / m / Y',strtotime( $linha['data_cad'])); ?>" onclick = "alert('PARA ALTERAR A DATA CLIQUE NO BOLTÃO ( VOLTAR )');" >
+                    <input readonly class = "form-control text-center" min=""   id = "date" type="text" value = "<?php echo  date('d / m / Y',strtotime($linha['data_cad'])); ?>" onclick = "alert('PARA ALTERAR A DATA CLIQUE NO BOLTÃO ( VOLTAR )');" >
                   </div>
                   <div class = "form-group col-md-6">
                     <label for=""> Horários Disponíveis</label>
                     <select class = "form-control text-center" name="horario" id="">
                       <?php do{ ?>
-                      <option class = "" value="<?php echo $linha['id']; ?>"><?php  echo date('s:i', $linha['horario']); ?></option>
+                      <option class = "" value="<?php echo date('s:i', $linha['horario']); ?>"><?php  echo date('s:i', $linha['horario']); ?></option>
                       <?php }while($linha = $conexao = mysqli_fetch_assoc($result_query)) ?>
                     </select>
                   </div>
@@ -113,7 +131,17 @@
               </div>
               </div>
             </div>
-
+            <script type="text/javascript">
+              $(document).ready(function () {
+               
+              window.setTimeout(function() {
+                  $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+                      $(this).remove(); 
+                  });
+              }, 5000);
+               
+              });
+              </script>
         </body>
       </html>
     <?php

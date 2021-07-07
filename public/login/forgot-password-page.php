@@ -1,3 +1,4 @@
+<?php session_start();  ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,9 +23,22 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+      <?php
+
+      if (isset($_SESSION['emailnot'])) 
+      {
+        ?>
+        <div class='alert alert-danger text-center' role='alert'>
+          <p> <strong>Email não cadastrado </strong> <br> no banco de dados. </p>
+        </div>
+      <?php
+        unset($_SESSION['emailnot']);
+        session_destroy();
+      }
+      ?>
       <p class="login-box-msg">Você esqueceu sua senha? Aqui você pode facilmente recuperar uma nova senha.</p>
 
-      <form action="control/email-enviar.php" method="post">
+      <form action="email/email.php" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" name= "email-cliente" placeholder="E-mail">
           <div class="input-group-append">
@@ -32,6 +46,7 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+          
         </div>
         <div class="row">
           <div class="col-12">
@@ -58,5 +73,16 @@
 <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../assets/js/adminlte.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+ 
+window.setTimeout(function() {
+    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+ 
+});
+</script>
 </body>
 </html>

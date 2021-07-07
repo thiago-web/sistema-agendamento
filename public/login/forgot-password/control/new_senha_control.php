@@ -2,7 +2,7 @@
 session_start();
 include('../../../../assets/banco/conection.php');
 // Recebe a variável da session
-$id_usuario        = $_SESSION['id'];
+$email        = $_SESSION['email_cliente'];
 
 // Declara as variáveis
 $senha = $_POST['new_senha'];
@@ -13,7 +13,7 @@ $result_up  = mysqli_query($conect, $sql_update);
 
 if ($result_up) {
   // Faz o delelte das informações
-  $sql_del    = "DELETE FROM codigos WHERE id_usuario = '$id_usuario'";
+  $sql_del    = "DELETE FROM codigos WHERE email = '$email'";
   $result_del = mysqli_query($conect, $sql_del);
   if($result_del){
   }

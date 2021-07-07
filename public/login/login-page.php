@@ -109,5 +109,16 @@
 <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../assets/js/adminlte.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+ 
+window.setTimeout(function() {
+    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+ 
+});
+</script>
 </body>
 </html>

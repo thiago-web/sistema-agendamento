@@ -2,7 +2,6 @@
 session_start();
 
 $email   = $_SESSION['email_cliente'];
-$id_user = $_SESSION['id'];
 
 ?>
 <!DOCTYPE html>

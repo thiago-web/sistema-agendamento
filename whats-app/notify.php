@@ -26,7 +26,7 @@ $result_sql_dados_cliente = mysqli_query($conect, $sql_dados_cliente);
 $dados_cliente = mysqli_fetch_assoc($result_sql_dados_cliente);
 
 // Recebe os dados do agendamento do cliente
-$sql_horarios_age = "SELECT id, nome, data_cad, horario 
+$sql_horarios_age = "SELECT id, nome, data_cad, horario, id_barbeiro 
 					FROM horarios_cadastrados 
 					WHERE 
 					id_usuario = '$user_id_session' 

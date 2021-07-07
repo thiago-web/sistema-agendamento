@@ -1,6 +1,11 @@
 <?php
     session_start();
     include('../../assets/banco/control-login.php');
+    $conect = include("../../assets/banco/conection.php");
+
+    $sql_barber   =  "SELECT id, nome FROM barbeiros";
+    $result_barber =  mysqli_query($conect, $sql_barber);
+
       ?>
       <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,22 +14,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Barbearia Cavalheiros</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
         <!-- <link rel="stylesheet" type="text/css" href="script/str.css.bootstrap.min.css"> -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
-        <!-- <script type="text/javascript" src="script/v.bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
-        <!-- <link rel="stylesheet" type="text/css" href="script/bootstrap.min.css">
-        <script type="text/javascript" src="script/js.bootstrap.min.js"></script>
-        <script type="text/javascript" src="script/stackpath.bootstrap.min.js" 
-        integrity = "sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
-        crossorigin = "anonymous"></script> -->
-        <!-- <link rel="stylesheet" type="text/css" href="script/netdna.bootstrap.min.css" > -->
+
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
+
+        <!-- icheck bootstrap -->
+        <link rel="stylesheet" href="../../aseets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
+        <!--  -->
         <link rel="stylesheet" href="css/bulma.min.css"/>
-        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
-        <link rel="stylesheet" href="../../assets/css/data_esconde.css">
+        <!-- <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/> -->
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
          <!-- <link rel="stylesheet" type="text/css" href="script/bootstrap.min.css"> -->
         <link rel="shortcut icon" href="../../assets/images/ico.ico" type="image/x-icon">
         <script src="script/mascaras.js"></script>
+
         <script>
         function d(){
         var semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
@@ -106,23 +120,49 @@
         <div class = "container">
         <div class = "form" id = "here" >
           <form method = "POST" action = "horarios.php" id = "form" name = "form" onchange="mySubmit(this.form)">
-          <div class = "form-row">
+            <div class = "form-row">
+             <!--  <div class = "form-group col-md-6">
+                <label for="InputNome"> Nome Completo </label>
+                <input class = "form-control" type="text" name = "nome_cliente" placeholder = "Digite o seu Nome " required = "required" id = "texto">
+              </div> -->
+          <div class="form-group col-md-12 mb-3">
+                <div class="form-group-text">
+                  <label class="" aria-hidden="true"> Selecione o Barbeiro</label>
+                </div>
+                <select name="barber" id="" class = form-control required="">
+                  <option selected="selected" value="">Escolha...</option>
+                  <?php
+                  do{
+                  ?>
 
-           <!--  <div class = "form-group col-md-6">
-              <label for="InputNome"> Nome Completo </label>
-              <input class = "form-control" type="text" name = "nome_cliente" placeholder = "Digite o seu Nome " required = "required" id = "texto">
-            </div> -->
-
-            <div class = "form-group col-md-12">
-            <label for="InputData"> Estou disponível no dia: </label>
-              <input class = "form-control" type="date" id = "no-spin" onchange = "d()" name = "data_cliente"  required = "required">
+                  <option class = "form-control" value="<?php echo $dado['id'];?>"> 
+                      <?php echo $dado['nome']; ?>
+                  </option>
+                  <?php
+                  }
+                  while ($dado = mysqli_fetch_assoc($result_barber));
+                  ?>
+                </select>
+                <!-- <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fa fa-user" aria-hidden="true"></span>
+                  </div>
+                </div> -->
+              </div>
+              <div class = "form-group col-md-12 mb-3">
+                <label for="InputData"> Estou disponível no dia: </label>
+                <input class = "form-control" type="date" id = "no-spin" onchange = "" name = "data_cliente"  required = "required">
+                
             </div>
-           
-        </div>      
           </div>
+            
+
+            
           <div class = "form-row">
-            <button type="submit" href = "text" class="btn btn-success btn-block is-solid is-link is-defaut  ">Verificar Disponibilidade</button>
+              <button type="submit" href = "text" class="btn btn-success btn-block is-solid is-link is-defaut  ">Verificar Disponibilidade</button>
+            </div>      
           </div>
+          
           </form>
         </div>
       </div>

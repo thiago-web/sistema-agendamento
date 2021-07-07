@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,7 +13,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../aseets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
 </head>
@@ -42,6 +44,9 @@
             </div>
           </div>
         </div>
+                  
+          
+
         <div class="form-group mb-3">
           <div class="form-group-text">
             <span class="fas fa-info-circle"> Informações Pessoais</span>

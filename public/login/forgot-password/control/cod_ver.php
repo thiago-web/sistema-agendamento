@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include('../../../../assets/banco/conection.php');
-$id_user = $_SESSION['id'];
+$email = $_SESSION['email_cliente'];
 
 // Recebe a variável da session
 
@@ -12,7 +12,7 @@ $codigo_user       = $_POST['codigo'];
 
 
 // Verifica o código enviado
-$sql_codigo = "SELECT id_usuario, codigo FROM codigos WHERE id_usuario = '$id_user' AND codigo = '$codigo_user'";
+$sql_codigo = "SELECT email, codigo FROM codigos WHERE email = '$email' AND codigo = '$codigo_user'";
 $result_cod = mysqli_query($conect, $sql_codigo);
 
 

@@ -3,7 +3,8 @@ session_start();
 include('../../../assets/banco/conection.php');
 
 // VARIÁVEIS DA EMPRESA
-$id_empresa = $_POST['empresa_id'];
+$id_empresa  = $_POST['empresa_id'];
+
 // VARIÁVEIS DO CLIENTE
 $nome       = $_POST['nome-cliente'];
 $data_nas   = $_POST['data-nas-cliente'];
@@ -14,10 +15,12 @@ $cidade     = $_POST['cidade-cliente'];
 $bairro     = $_POST['bairro-cliente'];
 $rua        = $_POST['rua-cliente'];
 $num        = $_POST['numero-cliente'];
+
 // VARIÁVEIS DE ACESSO
 $email 		= $_POST['user-email'];
 $senha      = $_POST['pass-cliente'];
 $senha      = md5($senha);
+
 // VERIFICA SE O CPF JÁ ESTÁ CADASTRADO
 $consulta = "SELECT cpf FROM informacoes_usuarios WHERE cpf = '$cpf' ";
 $resultado_consulta = mysqli_query($conect, $consulta);

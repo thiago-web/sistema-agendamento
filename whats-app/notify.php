@@ -179,7 +179,7 @@ $result_empresa = file_get_contents($url, false, $context_empresa);
 if ($result_cliente === FALSE) 
 {
 
-// Validar a notificação caso não tenha sido enviado.
+// Validar a notificação caso não tenha sido enviado .
 $insert_not = "
 INSERT INTO notificacao (id_agendamento, enviado) 
 SELECT id 

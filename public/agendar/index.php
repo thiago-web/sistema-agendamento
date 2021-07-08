@@ -129,6 +129,20 @@
         </div>
         <br><br>
         <div class = "container">
+          <?php 
+          if($_SESSION['notific_not'] == TRUE){
+            ?>
+              <div class='alert alert-primary text-center' role='alert'>
+                <p> <strong>Agendamento Concluído</strong> </p>
+              </div>
+              <div class='alert alert-danger text-center' role='alert'>
+                <p> <strong>Notificação Indisponível: </strong> Logo enviaremos uma noticação no seu WhatsApp ! </p>
+              </div>
+            <?php
+
+            unset($_SESSION['notific_not']);
+          }
+        ?>
         <div class = "form" id = "here" >
           <form method = "POST" action = "horarios.php" id = "form" name = "form" onchange="mySubmit(this.form)">
             <div class = "form-row">
@@ -136,10 +150,13 @@
                 <label for="InputNome"> Nome Completo </label>
                 <input class = "form-control" type="text" name = "nome_cliente" placeholder = "Digite o seu Nome " required = "required" id = "texto">
               </div> -->
-          <div class="form-group col-md-12 mb-3">
+              <div class="form-group col-md-12 mb-3">
+            
                 <div class="form-group-text">
                   <label class="" aria-hidden="true"> Selecione o Barbeiro</label>
+
                 </div>
+
                 <select name="barber" id="" class = form-control required="">
                   <option selected="selected" value="">Escolha...</option>
                   <?php
@@ -178,7 +195,17 @@
           </form>
         </div>
       </div>
-      
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+      window.setTimeout(function() {
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+            $(this).remove(); 
+        });
+      }, 5000);
+
+      });
+    </script>  
       <script>
         $(function () {
           $('.dropdown-toggle').dropdown();
@@ -202,6 +229,7 @@
     
     <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    
     </body>
 </html>
 <?php

@@ -26,15 +26,16 @@ $result_sql_dados_cliente = mysqli_query($conect, $sql_dados_cliente);
 $dados_cliente = mysqli_fetch_assoc($result_sql_dados_cliente);
 
 // Recebe os dados do agendamento do cliente
-$sql_horarios_age = "SELECT id, nome, data_cad, horario, id_barbeiro 
-					FROM horarios_cadastrados 
-					WHERE 
-					id_usuario = '$user_id_session' 
-					AND data_cad = '$data_ag_session' 
-					AND horario = '$horario_ag_session'";
+$sql_horarios_age = "
+SELECT id, nome, data_cad, horario, id_usuario, id_barbeiro 
+FROM horarios_cadastrados 
+WHERE id_usuario = '$user_id_session' 
+AND data_cad = '$data_ag_session' 
+AND horario = '$horario_ag_session'";
 
-// $result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
-// $dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
+$result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
+$dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
+
 // // Recebe as informações do barbeiro
 // $sql_barbeiro = "SELECT id_barbeiro, nome, telefone, email FROM horarios_cadastrados 
 // INNER JOIN barbeiros 
@@ -147,7 +148,6 @@ https://api.whatsapp.com/send?phone=55".$whats_num."&text=Olá,%20preciso%20conv
 //Faz a mensagem
 $msg_empresa = $saudacao_empresa ." ". $mensagem_empresa ;
 
-
 //Dispara a mensagem da API
 $url = 'https://whats-apping.herokuapp.com/send-message';
 
@@ -173,31 +173,86 @@ $options_empresa = array('http' => array(
 			'timeout' => 10 //10 segundos mata o processo se a API estiver offline
 		)
 	);
-$context_empresa  = stream_context_create($options_empresa);
+// $context_empresa  = stream_context_create($options_empresa);
 $result_empresa = file_get_contents($url, false, $context_empresa);
 
-if ($result_cliente === FALSE) 
+if ($result_cliente === FALSE ) 
 {
+$send = 0;
+$slq_verifica = "
+SELECT id_agendamento FROM notificacao_clientes
+WHERE id_agendamento = '$codigo_cliente'
+";
+$result_ = mysqli_query($conect, $slq_verifica);
+$row = mysqli_num_rows($result_);
+if($row < 1){
+	$insert_not_cli = "
+	INSERT INTO notificacao_clientes (id_agendamento, mensagem, numero, enviado, tipo)
+	VALUES ('$codigo_cliente','$msg_cliente','$whats_num', '$send', 'cliente') ;
+	";	
+	$result_insert_cli = mysqli_query($conect, $insert_not_cli);
+	$_SESSION['notific_not'] = TRUE;
+	?>
 
-// Validar a notificação caso não tenha sido enviado .
-$insert_not = "
-INSERT INTO notificacao (id_agendamento, enviado) 
-SELECT id 
-FROM horarios_cadastrados WHERE enviado = 'N'";
-
-
-/* Handle error */ 
+	<script>
+	window.location.assign('../public/agendar/index.php');
+	</script>
+	<?php
+}else{
+	?>
+	<script>
+	window.location.assign('../public/agendar/index.php');
+	</script>
+	<?php	
 }
-if ($result_empresa === FALSE) { /* Handle error */ }
+
+}
+
+
+if ($result_empresa === FALSE ) 
+{
+$send = 0;
+$slq_verifica = "
+SELECT id_agendamento FROM notificacao_empresas
+WHERE id_agendamento = '$codigo_cliente'
+";
+$result_ = mysqli_query($conect, $slq_verifica);
+$row = mysqli_num_rows($result_);
+if($row < 1){
+	$insert_not_cli = "
+	INSERT INTO notificacao_empresas (id_agendamento, mensagem, numero, enviado, tipo)
+	VALUES ('$codigo_cliente','$msg_empresa','$whats_num', '$send', 'empresa') ;
+	";	
+	$result_insert_cli = mysqli_query($conect, $insert_not_cli);
+	$_SESSION['notific_not'] = TRUE;
+	?>
+
+	<script>
+	window.location.assign('../public/agendar/index.php');
+	</script>
+	<?php
+}else{
+	?>
+	<script>
+	window.location.assign('../public/agendar/index.php');
+	</script>
+	<?php	
+}
+
+}
+else{
+
+	$_SESSION['notific'] = TRUE;
+	?>
+	<script>
+	window.location.assign('../public/agendar/index.php');
+	</script>
+	<?php	
+}
 
 // var_dump($result_cliente);
 // var_dump($result_empresa);
 
-?>
 
-<script>
-window.location.assign('');
-</script>
-<?php
-	
+
 ?>

@@ -29,7 +29,7 @@
     // echo $tempo;
 
 
-    // $_SESSION['hh'] = $horario;
+    $_SESSION['hh'] = $horario;
 
     // INSERE OS DADOS DE AGENDAMENTO NO BANCO DE DADOS
     $sql_insert = " INSERT INTO horarios_cadastrados (id_usuario, id_empresa, data_cad, horario, id_barbeiro) 
@@ -40,6 +40,7 @@
 
 
     if($result){
+
        ?>
        
        <script>

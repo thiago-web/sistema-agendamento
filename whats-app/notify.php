@@ -33,10 +33,13 @@ $sql_horarios_age = "SELECT id, nome, data_cad, horario, id_barbeiro
 					AND data_cad = '$data_ag_session' 
 					AND horario = '$horario_ag_session'";
 
-$result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
-$dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
-// Informações do agendamento
- // $cod = "SELECT id FROM horarios_cadastrados WHERE id_usuario = '$user_id_session' AND data_cad = ''"
+// $result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
+// $dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
+// // Recebe as informações do barbeiro
+// $sql_barbeiro = "SELECT id_barbeiro, nome, telefone, email FROM horarios_cadastrados 
+// INNER JOIN barbeiros 
+// ON (horarios_cadastrados.id_barbeiro = barbeiros.id)";
+
 
 
 // Informações do agendamento
@@ -173,12 +176,28 @@ $options_empresa = array('http' => array(
 $context_empresa  = stream_context_create($options_empresa);
 $result_empresa = file_get_contents($url, false, $context_empresa);
 
-if ($result_cliente === FALSE) { /* Handle error */ }
+if ($result_cliente === FALSE) 
+{
+
+// Validar a notificação caso não tenha sido enviado.
+$insert_not = "
+INSERT INTO notificacao (id_agendamento, enviado) 
+SELECT id 
+FROM horarios_cadastrados WHERE enviado = 'N'";
+
+
+/* Handle error */ 
+}
 if ($result_empresa === FALSE) { /* Handle error */ }
 
 // var_dump($result_cliente);
 // var_dump($result_empresa);
 
-header('location: ../public/avisos/aviso-agendado.php');	
+?>
+
+<script>
+window.location.assign('');
+</script>
+<?php
 	
 ?>

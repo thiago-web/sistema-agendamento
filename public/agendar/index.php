@@ -3,16 +3,30 @@
     include('../../assets/banco/control-login.php');
     $conect = include("../../assets/banco/conection.php");
 
-    $sql_barber   =  "SELECT id, nome FROM barbeiros";
-    $result_barber =  mysqli_query($conect, $sql_barber);
-
+    $sql_barber    = "SELECT id, nome FROM barbeiros";
+    $result_barber = mysqli_query($conect, $sql_barber);
+    $linhas = mysqli_num_rows($result_barber);
+    if ($linhas > 0) {
+      
+    
       ?>
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
     <head>
     	<meta charset="gb18030">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Barbearia Cavalheiros</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+        <link rel="stylesheet" href="css/bulma.min.css"/>
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/data_esconde.css">
+          <!-- <link rel="stylesheet" type="text/css" href="script/bootstrap.min.css"> -->
+        
+        <link rel="shortcut icon" href="../../assets/images/ico.ico" type="image/x-icon">
+
+        <script src="script/mascaras.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         <!-- <link rel="stylesheet" type="text/css" href="script/str.css.bootstrap.min.css"> -->
@@ -31,7 +45,7 @@
         <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
         <!--  -->
         <link rel="stylesheet" href="css/bulma.min.css"/>
-        <!-- <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/> -->
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
@@ -91,25 +105,22 @@
     <body >
       <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- navbar  navbar-light bg-light -->
-          <!-- <a class="navbar-brand" href="index.php" target="blank">lPágina Inicia</a> -->
-          <a class="navbar-brand-light " href="https://www.facebook.com/cavabarbearia" target="blank">
-            <img src="../../assets/images/logo.jpg" width="50" height="50" class="d-inline-block " alt="">
-                Barbearia Cavalheiros
-            </a>
-          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button> -->
-          
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              </div>
-                  <button class = "btn btn-success" onclick = "window.location.href = '../../assets/banco/logout.php'" > Sair
-                  </button>
-              </div>
-            </ul>
-          </div>
-        </nav>
-      </div>
+            <!-- <a class="navbar-brand" href="index.php" target="blank">lPágina Inicia</a> -->
+            <a class="navbar-brand-light " href="http://teleson.net.br/" target="blank">
+              <img src="../../assets/images/logo.jpg" width="50" height="50" class="d-inline-block " alt="">
+                  Barbearia Cavalheiros
+              </a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button> -->
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto"></ul>
+            </div>
+            <button class = "btn btn-success" onclick = "window.location.href = '../../assets/banco/logout.php'" > Sair
+            </button>
+          </nav>
+        </div>
 
       <div class = "container text-center">
           <h1 class = "display-3">
@@ -133,11 +144,12 @@
                   <option selected="selected" value="">Escolha...</option>
                   <?php
                   do{
+                    
                   ?>
-
-                  <option class = "form-control" value="<?php echo $dado['id'];?>"> 
-                      <?php echo $dado['nome']; ?>
-                  </option>
+                  <option class = "form-control" value="<?php echo ($dado['id']);?>">
+                    <?php echo $dado['nome']; ?>
+                      
+                    </option>
                   <?php
                   }
                   while ($dado = mysqli_fetch_assoc($result_barber));
@@ -192,4 +204,9 @@
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
     </body>
 </html>
+<?php
+
+}
+?>
+
 

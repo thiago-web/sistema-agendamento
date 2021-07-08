@@ -152,20 +152,16 @@ Se você não reconhece está ação, favor ignorar este email.
 // Opcional: Anexos 
 // $mail->AddAttachment("/home/usuario/public_html/documento.pdf", "documento.pdf"); 
 
-// Envia o e-mail 
+$sql_cod = "INSERT INTO codigos( email, codigo ) VALUES ('$emailenviar', '$codigo')";
+
+$result_cod = mysqli_query($conect, $sql_cod);
+
+if($result_cod){
+    // Envia o e-mail 
 $enviado = $mail->Send(); 
 
 
-// Váriáveis para enviar mensagem no WhatsApp
-$tel_destino   = '19987208587'; // Digite o número de destino
-$num_whats     = telefone($telefone);
-$num_whats     = to_numero($num_whats);
-$mensagem      = 'Minha mensagem aqui';
-$mensagem      = preg_replace('/[ -]+/' , '%20' , $mensagem);
 
-// Link para conversar por Whats App
-
-$link = "https://api.whatsapp.com/send?phone=55".$tel_destino."&text=".$mensagem;
 
 // Exibe uma mensagem de resultado 
 if ($enviado) 
@@ -203,5 +199,20 @@ else{
     // header('../forgot-password-page.php');
     // echo "Erro: ". mysqli_error($conect);
 }
+}
+else{
+    echo("ERRO: Código não inserido <br>");
+    echo('ERRO'. mysqli_error($conect));
+    $_SESSION['emailnot'] = true;
+    ?>
+
+    <script type="text/javascript">
+        window.location.assign('../forgot-password-page.php');
+    </script>
+    <?php 
+}
+
+
+
 
 ?>

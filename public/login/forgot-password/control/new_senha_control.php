@@ -8,7 +8,7 @@ $email        = $_SESSION['email_cliente'];
 $senha = $_POST['new_senha'];
 
 // Faz o update da senha
-$sql_update = "UPDATE usuarios SET senha = MD5('$senha') WHERE id_usuario = '$id_usuario'";
+$sql_update = "UPDATE usuarios SET senha = MD5('$senha') WHERE usuario = '$email'";
 $result_up  = mysqli_query($conect, $sql_update);
 
 if ($result_up) {
@@ -22,6 +22,7 @@ if ($result_up) {
   }
   $_SESSION['senha_auterada'] =  true;
   header('location:../../login-page.php');
+  
 }
 else{
   echo "<br> Erro: ". mysqli_error();

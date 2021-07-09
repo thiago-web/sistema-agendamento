@@ -21,9 +21,12 @@ $dados_empresa = mysqli_fetch_assoc($result_sql_dados_empresa);
 
 
 // Recebe os dados do cliente 
-$sql_dados_cliente        = "SELECT id, nome, email, telefone, cep, cidade, bairro, rua, num  FROM informacoes_usuarios WHERE id = '$user_id_session' " ;
+$sql_dados_cliente     = "SELECT id, nome, email, telefone, cep, cidade, bairro, rua, num  
+FROM informacoes_usuarios WHERE id = '$user_id_session'" ;
 $result_sql_dados_cliente = mysqli_query($conect, $sql_dados_cliente);
 $dados_cliente = mysqli_fetch_assoc($result_sql_dados_cliente);
+
+
 
 // Recebe os dados do agendamento do cliente
 $sql_horarios_age = "
@@ -36,12 +39,6 @@ AND horario = '$horario_ag_session'";
 $result_sql_horarios_age = mysqli_query($conect, $sql_horarios_age);
 $dados_horarios = mysqli_fetch_assoc($result_sql_horarios_age);
 
-// // Recebe as informações do barbeiro
-// $sql_barbeiro = "SELECT id_barbeiro, nome, telefone, email FROM horarios_cadastrados 
-// INNER JOIN barbeiros 
-// ON (horarios_cadastrados.id_barbeiro = barbeiros.id)";
-
-
 
 // Informações do agendamento
 $codigo_cliente = $dados_horarios['id'];
@@ -50,6 +47,8 @@ $data_agendada  = implode("/",array_reverse(explode("-",$data_agendada)));
 $hora_agendada  = $dados_horarios['horario'];
 $hora_agendada  = date("H:i", strtotime($hora_agendada));
 $data_hoje      = date('d/m/Y');
+
+
 
 // Informações do cliente
 $nome_usuario   = $dados_cliente['nome'];
@@ -173,82 +172,114 @@ $options_empresa = array('http' => array(
 			'timeout' => 10 //10 segundos mata o processo se a API estiver offline
 		)
 	);
-// $context_empresa  = stream_context_create($options_empresa);
+$context_empresa  = stream_context_create($options_empresa);
 $result_empresa = file_get_contents($url, false, $context_empresa);
 
-if ($result_cliente === FALSE ) 
+if ($result_cliente === FALSE || $result_empresa === FALSE ) 
 {
-$send = 0;
-$slq_verifica = "
-SELECT id_agendamento FROM notificacao_clientes
-WHERE id_agendamento = '$codigo_cliente'
-";
-$result_ = mysqli_query($conect, $slq_verifica);
-$row = mysqli_num_rows($result_);
-if($row < 1){
-	$insert_not_cli = "
-	INSERT INTO notificacao_clientes (id_agendamento, mensagem, numero, enviado, tipo)
-	VALUES ('$codigo_cliente','$msg_cliente','$whats_num', '$send', 'cliente') ;
-	";	
-	$result_insert_cli = mysqli_query($conect, $insert_not_cli);
-	$_SESSION['notific_not'] = TRUE;
-	?>
+	$send = 0;
+	$slq_verifica1 = "
+	SELECT id_agendamento FROM notificacao_clientes
+	WHERE id_agendamento = '$codigo_cliente'
+	";
+	$result_1 = mysqli_query($conect, $slq_verifica1);
+	$row1 = mysqli_num_rows($result_1);
+	if($row1 < 1){
+		$insert_not_cli = "
+		INSERT INTO notificacao_clientes (id_agendamento, mensagem, numero, enviado, tipo)
+		VALUES ('$codigo_cliente','$msg_cliente','$whats_num', '$send', 'cliente') ;
+		";	
+		$result_insert_cli = mysqli_query($conect, $insert_not_cli);
+		$_SESSION['notific_not'] = TRUE;
+		?>
 
-	<script>
-	window.location.assign('../public/agendar/index.php');
-	</script>
-	<?php
-}else{
-	?>
-	<script>
-	window.location.assign('../public/agendar/index.php');
-	</script>
-	<?php	
+		<script>
+		// window.location.assign('../public/agendar/index.php');
+		</script>
+		<?php
+	}
+
+	$slq_verifica2 = "
+	SELECT id_agendamento FROM notificacao_empresas
+	WHERE id_agendamento = '$codigo_cliente'
+	";
+	$result_2 = mysqli_query($conect, $slq_verifica2);
+	$row2 = mysqli_num_rows($result_2);
+	if($row2 < 1)
+	{
+		$insert_not_emp = "
+		INSERT INTO notificacao_empresas (id_agendamento, mensagem, numero, enviado, tipo)
+		VALUES ('$codigo_cliente','$msg_empresa','$tel_empresa', '$send', 'empresa') ;
+		";	
+		$insert_not_emp = mysqli_query($conect, $insert_not_emp);
+		$_SESSION['notific_not'] = TRUE;
+		?>
+
+		<script>
+		// window.location.assign('../public/agendar/index.php');
+		</script>
+		<?php
+	}
+
+$_SESSION['notific_not'] = TRUE;
+?>
+<script>
+window.location.assign('../public/agendar/index.php');
+</script>
+<?php
 }
+	$send = 1;
+	$slq_verifica1 = "
+	SELECT id_agendamento FROM notificacao_clientes
+	WHERE id_agendamento = '$codigo_cliente'
+	";
+	$result_1 = mysqli_query($conect, $slq_verifica1);
+	$row1 = mysqli_num_rows($result_1);
+	if($row1 < 1){
+		$insert_not_cli = "
+		INSERT INTO notificacao_clientes (id_agendamento, mensagem, numero, enviado, tipo)
+		VALUES ('$codigo_cliente','$msg_cliente','$whats_num', '$send', 'cliente') ;
+		";	
+		$result_insert_cli = mysqli_query($conect, $insert_not_cli);
+		$_SESSION['notific_not'] = TRUE;
+		?>
 
-}
+		<script>
+		// window.location.assign('../public/agendar/index.php');
+		</script>
+		<?php
+	}
+
+	$slq_verifica2 = "
+	SELECT id_agendamento FROM notificacao_empresas
+	WHERE id_agendamento = '$codigo_cliente'
+	";
+	$result_2 = mysqli_query($conect, $slq_verifica2);
+	$row2 = mysqli_num_rows($result_2);
+	if($row2 < 1)
+	{
+		$insert_not_emp = "
+		INSERT INTO notificacao_empresas (id_agendamento, mensagem, numero, enviado, tipo)
+		VALUES ('$codigo_cliente','$msg_empresa','$tel_empresa', '$send', 'empresa') ;
+		";	
+		$insert_not_emp = mysqli_query($conect, $insert_not_emp);
+		$_SESSION['notific_not'] = TRUE;
+		?>
+
+		<script>
+		// window.location.assign('../public/agendar/index.php');
+		</script>
+		<?php
+	}
+
+$_SESSION['notific_not'] = TRUE;
+?>
+<script>
+window.location.assign('../public/agendar/index.php');
+</script>
+<?php	
 
 
-if ($result_empresa === FALSE ) 
-{
-$send = 0;
-$slq_verifica = "
-SELECT id_agendamento FROM notificacao_empresas
-WHERE id_agendamento = '$codigo_cliente'
-";
-$result_ = mysqli_query($conect, $slq_verifica);
-$row = mysqli_num_rows($result_);
-if($row < 1){
-	$insert_not_cli = "
-	INSERT INTO notificacao_empresas (id_agendamento, mensagem, numero, enviado, tipo)
-	VALUES ('$codigo_cliente','$msg_empresa','$whats_num', '$send', 'empresa') ;
-	";	
-	$result_insert_cli = mysqli_query($conect, $insert_not_cli);
-	$_SESSION['notific_not'] = TRUE;
-	?>
-
-	<script>
-	window.location.assign('../public/agendar/index.php');
-	</script>
-	<?php
-}else{
-	?>
-	<script>
-	window.location.assign('../public/agendar/index.php');
-	</script>
-	<?php	
-}
-
-}
-else{
-
-	$_SESSION['notific'] = TRUE;
-	?>
-	<script>
-	window.location.assign('../public/agendar/index.php');
-	</script>
-	<?php	
-}
 
 // var_dump($result_cliente);
 // var_dump($result_empresa);

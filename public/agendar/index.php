@@ -195,17 +195,17 @@
           </form>
         </div>
       </div>
-    <script type="text/javascript">
-    $(document).ready(function () {
+      <script type="text/javascript">
+      $(document).ready(function () {
 
-      window.setTimeout(function() {
-        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
-            $(this).remove(); 
+        window.setTimeout(function() {
+          $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+              $(this).remove(); 
+          });
+        }, 5000);
+
         });
-      }, 5000);
-
-      });
-    </script>  
+      </script>  
       <script>
         $(function () {
           $('.dropdown-toggle').dropdown();

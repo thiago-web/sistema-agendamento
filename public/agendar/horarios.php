@@ -5,11 +5,34 @@
 
     $data_dis   = $_POST['data_cliente'];
     $barber     = $_POST['barber'];
+    $servico    = $_POST['service'];
 
 
     $dom = date('w', strtotime($data_dis));
+    $hora_atual = date('H:i:s');
+
+    /**
+   * @param $dateStart - Data inicial
+   * @param $dateEnd - Data final
+   * @param $format  - Formato esperado de saida
+   * %Y Anos, %m Meses, %d Dias, %H Horas, %i Minutos, %s Segundos - Tipos de Saídas
+
+   */
+  function dateDiff( $dateStart, $dateEnd, $format = '%a' ) {
+      $d1     =   new DateTime( $dateStart );
+      $d2     =   new DateTime( $dateEnd );
+      //Calcula a diferença entre as datas
+      $diff   =   $d1->diff($d2, true);   
+      //Formata no padrão esperado e retorna
+      return $diff->format( $format );
+    }
+    $date =  '2021-07-10 21:00:00';
+    $dif = dateDiff($date, $hora_atual, '%H:%i:%s');
     
-    
+    echo "Data escolhida: " .$date ."<br>";
+    echo "Data Atual: " . $hora_atual ."<br>";
+    echo "Diferença: ". $dif;
+      
     if($dom == 0){
       ?>
     <script>
@@ -25,13 +48,19 @@
     
     $_SESSION['data_dis']  = $data_dis;
     $_SESSION['barber']    = $barber;
+    $_SESSION['servico']   = $servico;
 
-
+    // Informações dos horários disponiveis pela data escolhida
     $sql = "SELECT p.* FROM (SELECT '$data_dis' data_cad, horario,id FROM horarios_possiveis) p LEFT JOIN horarios_cadastrados c on p.horario=c.horario AND p.data_cad=c.data_cad WHERE c.data_cad is null";
     $result_query = mysqli_query($conect, $sql);
     $linha = mysqli_fetch_assoc($result_query);
     $total = mysqli_num_rows($result_query);
     
+    // Informações do Barbeiro
+    $sql_barber  =  "SELECT id, nome FROM barbeiros WHERE id = '$barber'";
+    $result_barb =  mysqli_query($conect, $sql_barber);
+    // Informações do serviço
+    // $sql_servico = "SELECT id, nome_servico,"
 
     if($total != 0){
       ?>
@@ -94,22 +123,39 @@
               ?>
               <div class = "form">
               <form action="control.php" method="post">
-                <div class = "form-row">
-                  <div class = "form-group col-md-6">
+                <!-- <div class = "form-row">
+                  <div class = "form-group col-md-4">
                     <label for=""> Data Selecionada </label>
-                    <input readonly class = "form-control text-center" min=""   id = "date" type="text" value = "<?php echo  date('d / m / Y',strtotime($linha['data_cad'])); ?>" onclick = "alert('PARA ALTERAR A DATA CLIQUE NO BOLTÃO ( VOLTAR )');" >
+                    <input readonly class = "form-control text-center" min=""   id = "date" type="text" value = "<?php echo  date('d/m/Y',strtotime($linha['data_cad'])); ?>" 
+                    onclick = "alert('PARA ALTERAR, CLIQUE NO BOLTÃO ( VOLTAR )');" >
                   </div>
-                  <div class = "form-group col-md-6">
-                    <label for=""> Horários Disponíveis</label>
+                  <div class = "form-group col-md-4">
+                    <?php while($barbeiro = mysqli_fetch_assoc($result_barb)){?>
+                    <label for=""> Com o: </label>
+                    <input readonly class = "form-control text-center" min=""   id = "date" type="text" value = "<?php echo  $barbeiro['nome'] ; ?>" 
+                    onclick = "alert('PARA ALTERAR, CLIQUE NO BOLTÃO ( VOLTAR )');" >
+                  <?php }?>
+                  </div>
+                  <div class = "form-group col-md-4">
+                    <label for=""> Valor : </label>
+                    <input readonly class = "form-control text-center" min=""   id = "date" type="text" value = "<?php echo  $servico ; ?>"
+                    onclick = "alert('PARA ALTERAR,  CLIQUE NO BOLTÃO ( VOLTAR )');" >
+                  </div>
+                </div> -->
+                <div class="form-row">
+                  <div class = "form-group col-md-12">
+                    <!-- <label for=""> Horários Disponíveis</label> -->
                     <select class = "form-control text-center" name="horario" id="">
-                      <?php do{ ?>
-                      <option class = "" value="<?php echo date('s:i', $linha['horario']); ?>"><?php  echo date('s:i', $linha['horario']); ?></option>
-                      <?php }while($linha = $conexao = mysqli_fetch_assoc($result_query)) ?>
+                      <?php
+                       do{ ?>
+                      <option class = "" value="<?php echo date('H:i:s', $linha['horario']); ?>">
+                      <?php  echo date('s:i', $linha['horario']); ?></option>
+                      <?php }while($linha = $conexao = mysqli_fetch_assoc($result_query)); ?>
                     </select>
                   </div>
                 </div>
                 <div class = "form-row">
-                  <div class = "form-group col-md-6">
+                  <div class = "form-group col-md-6 mb-5">
                       <button type="button" href = "" onClick="history.go(-1)" class="btn btn-danger btn-block is-solid is-link is-defaut  ">Voltar</button>
                   </div>
                   <div class = "form-group col-md-6" >

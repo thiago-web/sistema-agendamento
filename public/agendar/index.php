@@ -6,8 +6,7 @@
     $sql_barber    = "SELECT id, nome FROM barbeiros";
     $result_barber = mysqli_query($conect, $sql_barber);
     $linhas = mysqli_num_rows($result_barber);
-    if ($linhas > 0) {
-      
+
     
       ?>
 <!DOCTYPE html>
@@ -22,8 +21,6 @@
         <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/data_esconde.css">
-          <!-- <link rel="stylesheet" type="text/css" href="script/bootstrap.min.css"> -->
-        
         <link rel="shortcut icon" href="../../assets/images/ico.ico" type="image/x-icon">
 
         <script src="script/mascaras.js"></script>
@@ -135,8 +132,9 @@
               <div class='alert alert-primary text-center' role='alert'>
                 <p> <strong>Agendamento Concluído</strong> </p>
               </div>
-              <div class='alert alert-danger text-center' role='alert'>
-                <p> <strong>Notificação Indisponível: </strong> Logo enviaremos uma noticação no seu WhatsApp ! </p>
+              <div class='alert alert-warning text-center' role='alert'>
+                <p> <strong>Notificação Indisponível: </strong> Logo enviaremos uma noticação no seu 
+                  <strong style="font-color:green;">WhatsApp ! </strong></p>
               </div>
             <?php
 
@@ -160,16 +158,47 @@
                 <select name="barber" id="" class = form-control required="">
                   <option selected="selected" value="">Escolha...</option>
                   <?php
-                  do{
+
+                  while ($barbeiro = mysqli_fetch_assoc($result_barber)){
+  
+                  ?>
+                  <option class = "form-control" value="<?php echo ($barbeiro['id']);?>">
+                    <?php echo $barbeiro['nome']; ?>
+                  </option>
+                  <?php }?>
+                </select>
+                <!-- <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fa fa-user" aria-hidden="true"></span>
+                  </div>
+                </div> -->
+              </div>
+              <div class="form-group col-md-12 mb-3">
+            
+                <div class="form-group-text">
+                  <label class="" aria-hidden="true"> Selecione o Serviço</label>
+
+                </div>
+
+                <select name="servico" id="" class = form-control required="">
+                  <option selected="selected" value="">Escolha...</option>
+                  <?php
+
+                  $sql_service    = "SELECT id, nome_servico, valor_servico, tempo_servico FROM servicos";
+                  $result_service = mysqli_query($conect, $sql_service);
+                  $rows = mysqli_num_rows($result_service);
+                  if ($rows > 0) {
+
+                  while ($servico = mysqli_fetch_assoc($result_service))
+                  {
                     
                   ?>
-                  <option class = "form-control" value="<?php echo ($dado['id']);?>">
-                    <?php echo $dado['nome']; ?>
+                  <option class = "form-control" value="<?php echo ($servico['id']);?>">
+                    <?php echo $servico['nome_servico'] . " - R$". $servico['valor_servico']. " - ".$servico['tempo_servico']." minutos"; ?>
                       
                     </option>
                   <?php
                   }
-                  while ($dado = mysqli_fetch_assoc($result_barber));
                   ?>
                 </select>
                 <!-- <div class="input-group-append">
@@ -233,8 +262,8 @@
     </body>
 </html>
 <?php
-
 }
+
 ?>
 
 

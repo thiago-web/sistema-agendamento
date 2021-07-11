@@ -3,11 +3,12 @@
     include('../../assets/banco/control-login.php');
     include('../../assets/banco/conection.php');
 
-    // $nome       = $_POST['nome'];
+    
     $id_usuario = $_SESSION['id'];
     $id_empresa = $_SESSION['id_empresa'];
     $data_dis   = $_SESSION['data_dis'];
     $id_barber  = $_SESSION['barber'];
+    $id_servico = $_SESSION['servico'];
     $horario    = $_POST['horario'];
 
     // $hora1 =  date('H:i');

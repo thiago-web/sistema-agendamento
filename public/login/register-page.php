@@ -20,7 +20,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href=""><b>Barbearia</b> Cavalheiros</a>
+    <a href=""> <strong> Sistema de Agendamento</strong> <br>Barbearia Cavalheiros</a>
   </div>
 
   <div class="card">

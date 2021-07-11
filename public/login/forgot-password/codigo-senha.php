@@ -23,7 +23,7 @@ $email   = $_SESSION['email_cliente'];
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href=""><b>Barbearia</b> Cavalheiros</a>
+    <a href=""> <strong> Sistema de Agendamento</strong> <br>Barbearia Cavalheiros</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

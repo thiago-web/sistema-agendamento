@@ -1,0 +1,3 @@
+[12-Jun-2021 21:33:42 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/dueeme66/teleson.gigapop.com.br/cavabar/public/login/control/email-enviar.php:150) in /home1/dueeme66/teleson.gigapop.com.br/cavabar/public/login/control/email-enviar.php on line 153
+[21-Jun-2021 23:28:17 America/Fortaleza] PHP Warning:  vsprintf(): Too few arguments in /home1/dueeme66/teleson.gigapop.com.br/cavabar/public/login/control/email-enviar.php on line 7
+[21-Jun-2021 23:28:17 America/Fortaleza] PHP Warning:  vsprintf(): Too few arguments in /home1/dueeme66/teleson.gigapop.com.br/cavabar/public/login/control/email-enviar.php on line 7

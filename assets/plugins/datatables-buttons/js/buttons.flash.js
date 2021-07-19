@@ -1102,7 +1102,7 @@ DataTable.ext.buttons.copyFlash = $.extend( {}, flashButton, {
 	className: 'buttons-copy buttons-flash',
 
 	text: function ( dt ) {
-		return dt.i18n( 'buttons.copy', 'Copy' );
+		return dt.i18n( 'buttons.copy', 'Copiar' );
 	},
 
 	action: function ( e, dt, button, config ) {
@@ -1141,10 +1141,10 @@ DataTable.ext.buttons.copyFlash = $.extend( {}, flashButton, {
 		this.processing( false );
 
 		dt.buttons.info(
-			dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ),
+			dt.i18n( 'buttons.copyTitle', 'Copiado para transferência' ),
 			dt.i18n( 'buttons.copySuccess', {
-				_: 'Copied %d rows to clipboard',
-				1: 'Copied 1 row to clipboard'
+				_: 'Copiado %d linhas para transferência',
+				1: 'Copiado 1 linha para transferência'
 			}, data.rows ),
 			3000
 		);

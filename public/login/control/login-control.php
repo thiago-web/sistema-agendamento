@@ -27,8 +27,8 @@ $row_id_user = mysqli_num_rows($result_id_user);
 // REDIRECIONAMENTO DO USUÁRIO
 if ($row_login == 1) {
 
-	if ($usuario == 'adm@cavabar.com') {
-		header('location:adm/index.php ');
+	if ($usuario == 'admin@sws.com.br') {
+		header('location:../sws-admin/index.php');
 		exit();
 	} else {
 		$_SESSION['usuario']     = $usuario;

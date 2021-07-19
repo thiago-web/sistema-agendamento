@@ -90,18 +90,22 @@ $mail = new PHPMailer();
 $mail->IsSMTP(); 
 
 // Enviar por SMTP 
-$mail->Host = "mail.dueeme.com.br"; 
+$mail->Host = "mail.salao.art.br"; 
 
 // Você pode alterar este parametro para o endereço de SMTP do seu provedor 
 $mail->Port = 587; 
 
+// $mail->Host = 'localhost' ;
+// $mail->SMTPAuth = false ;
+// $mail->SMTPAutoTLS = false ; 
+// $mail->Porta = 25 ;
 
 // Usar autenticação SMTP (obrigatório) 
 $mail->SMTPAuth = true; 
 
 // Usuário do servidor SMTP (endereço de email) 
 // obs: Use a mesma senha da sua conta de email 
-$mail->Username = 'estetica@dueeme.com.br'; 
+$mail->Username = 'thiago@salao.art.br'; 
 $mail->Password = 'Olecran1.'; 
 
 // Configurações de compatibilidade para autenticação em TLS 
@@ -112,10 +116,10 @@ $mail->SMTPOptions = array( 'ssl' => array( 'verify_peer' => false, 'verify_peer
 
 // Define o remetente 
 // Seu e-mail 
-$mail->From = "estetica@dueeme.com.br"; 
+$mail->From = "thiago@salao.art.br"; 
 
 // Seu nome 
-$mail->FromName = "[NOME DA EMPRESA]"; 
+$mail->FromName = "SWS - Sistema de Agendamento"; 
 
 // Define o(s) destinatário(s) 
 $mail->AddAddress($emailenviar, $nome); 
@@ -161,8 +165,6 @@ if($result_cod){
 $enviado = $mail->Send(); 
 
 
-
-
 // Exibe uma mensagem de resultado 
 if ($enviado) 
 { 
@@ -179,12 +181,12 @@ else {
     ?>
     <script type="text/javascript">
         alert('Ops, solicitação não enviada, tente novamente mais tarde !');
+        // window.location.assign('../forgot-password-page.php');
     </script>
     <?php
 
-
     // Erro:
-    // echo "Houve um erro enviando o email: ".$mail->ErrorInfo; 
+    echo "Houve um erro enviando o email: ".$mail->ErrorInfo; 
 }
 
 }

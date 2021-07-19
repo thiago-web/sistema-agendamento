@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="../../assets/images/logo.jpg" alt="Logo" 
+    height="145" width="145">
+  </div>
 <div class="login-box">
   <div class="login-logo">
     <a href=""> <strong> Sistema de Agendamento</strong> <br>Barbearia Cavalheiros</a>
@@ -31,6 +36,7 @@
                 <p> <strong>Usuário</strong> ou <strong>Senha</strong> não está preenchido. </p>
               </div>
             <?php
+            unset($_SESSION['nao_autenticado']);
             }
             if (isset($_SESSION['nao_autenticado'])) {
             ?>
@@ -73,7 +79,7 @@
             ?>
         <div class="row">
           <!-- /.col -->
-          <div class="col-12">
+          <div class="col-12 mb-3">
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
           </div>
           <!-- /.col -->

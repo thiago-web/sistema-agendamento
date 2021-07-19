@@ -1089,7 +1089,7 @@
 						_fnCamelToHungarian( defaults.oLanguage, json );
 						$.extend( true, oLanguage, json );
 			
-						_fnCallbackFire( oSettings, null, 'i18n', [oSettings]);
+						_fnCallbackFire( oSettings, null, 'i18n/Portuguese-Brasil', [oSettings]);
 						_fnInitialise( oSettings );
 					},
 					error: function () {
@@ -1100,7 +1100,7 @@
 				bInitHandedOff = true;
 			}
 			else {
-				_fnCallbackFire( oSettings, null, 'i18n', [oSettings]);
+				_fnCallbackFire( oSettings, null, 'i18n/Portuguese-Brasil', [oSettings]);
 			}
 			
 			/*

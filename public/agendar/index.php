@@ -5,12 +5,10 @@
 
     $sql_barber    = "SELECT id, nome FROM barbeiros";
     $result_barber = mysqli_query($conect, $sql_barber);
-    $linhas = mysqli_num_rows($result_barber);
-
-    
-      ?>
+    $linhas = mysqli_num_rows($result_barber);    
+?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
     <head>
     	<meta charset="gb18030">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -41,7 +39,7 @@
         <!-- Theme style -->
         <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
         <!--  -->
-        <link rel="stylesheet" href="css/bulma.min.css"/>
+        
         <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -59,19 +57,7 @@
         </script>
   
     </head>
-     <script language="JavaScript">
-      function protegercodigo()
-        {
-            if (event.button==2||event.button==3)
-            {
-              alert('CÓDIGO PROTEGIDO !');
-            }
-        }
-        document.onmousedown=protegercodigo
-    </script>
-    
-
-    <style>
+<style>
       #no-spin::-webkit-inner-spin-button {-webkit-appearance: none;}
 
       input[type="date"] {
@@ -98,10 +84,19 @@
       right: 6px;
       color: #999;
       }
+      body{
+        background-color:;
+      }
+
     </style>
     <body >
+      <!-- Preloader -->
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../assets/images/logo.jpg" alt="Logo" 
+        height="145" width="145">
+      </div>
       <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- navbar  navbar-light bg-light -->
+        <nav  class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;"><!-- navbar  navbar-light bg-light -->
             <!-- <a class="navbar-brand" href="index.php" target="blank">lPágina Inicia</a> -->
             <a class="navbar-brand-light " href="http://teleson.net.br/" target="blank">
               <img src="../../assets/images/logo.jpg" width="50" height="50" class="d-inline-block " alt="">
@@ -124,8 +119,30 @@
            Informações de Agendamento
           </h1>
         </div>
-        <br><br>
         <div class = "container">
+          <?php
+              
+              if($_SESSION['hora_possivel'] == true)
+              {
+                ?>
+                <div class='alert alert-danger text-center' role='alert'>
+                  <p> <strong> Agendamento não concluído:</strong> <br> Muito cedo para agendar este horário, escolha outro. </p>
+                </div>
+              <?php
+              unset($_SESSION['hora_possivel']);
+              }
+              ?>
+          <?php
+          if ($_SESSION['domingo'] == true)
+          {
+            ?>
+            <div class='alert alert-danger text-center' role='alert'>
+              <p> <strong> Agendamento não concluído: </strong> Não trabalhamos aos domingos!</p>
+            </div>
+          <?php
+            unset($_SESSION['domingo']);
+          }
+          ?>
           <?php 
           if($_SESSION['notific_not'] == TRUE){
             ?>
@@ -133,7 +150,7 @@
                 <p> <strong>Agendamento Concluído</strong> </p>
               </div>
               <div class='alert alert-warning text-center' role='alert'>
-                <p> <strong>Notificação Indisponível: </strong> Logo enviaremos uma noticação no seu 
+                <p> <strong>Observação: </strong> Logo enviaremos uma noticação no seu 
                   <strong style="font-color:green;">WhatsApp ! </strong></p>
               </div>
             <?php
@@ -209,7 +226,8 @@
               </div>
               <div class = "form-group col-md-12 mb-3">
                 <label for="InputData"> Estou disponível no dia: </label>
-                <input class = "form-control" type="date" id = "no-spin" onchange = "" name = "data_cliente"  required = "required">
+                <input class = "form-control" type="date" id = "no-spin" onchange = "" 
+                name = "data_cliente"  required = "required">
                 
             </div>
           </div>
@@ -217,9 +235,11 @@
 
             
           <div class = "form-row">
+            <div class="form-group col-md-12 mb-3">
               <button type="submit" href = "text" class="btn btn-success btn-block is-solid is-link is-defaut  ">Verificar Disponibilidade</button>
-            </div>      
-          </div>
+            </div>
+          </div>      
+      </div>
           
           </form>
         </div>
@@ -255,10 +275,23 @@
 
     </script>
     
-    
-    <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
-    <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
-    
+    <!-- jQuery -->
+    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../assets/js/adminlte.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+       
+      window.setTimeout(function() {
+          $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+              $(this).remove(); 
+          });
+      }, 5000);
+       
+      });
+    </script>
     </body>
 </html>
 <?php

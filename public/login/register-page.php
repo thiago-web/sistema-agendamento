@@ -18,6 +18,11 @@
   <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
 </head>
 <body class="hold-transition register-page">
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="../../assets/images/logo.jpg" alt="Logo" 
+    height="145" width="145">
+  </div>
 <div class="register-box">
   <div class="register-logo">
     <a href=""> <strong> Sistema de Agendamento</strong> <br>Barbearia Cavalheiros</a>

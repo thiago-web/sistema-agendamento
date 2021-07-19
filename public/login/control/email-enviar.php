@@ -150,8 +150,7 @@ if($enviaremail)
         
     }
     else{
-        echo("ERRO: Código não inserido <br>");
-        echo('ERRO'. mysqli_error($conect));
+        
     }
     header('location:../forgot-password/codigo-senha.php');
 } 

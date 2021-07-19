@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="../../assets/images/logo.jpg" alt="Logo" 
+    height="145" width="145">
+  </div>
 <div class="login-box">
   <div class="login-logo">
       <a href=""> <strong> Sistema de Agendamento</strong> <br>Barbearia Cavalheiros</a>
@@ -36,7 +41,7 @@
         session_destroy();
       }
       ?>
-      <p class="login-box-msg">Você esqueceu sua senha? Aqui você pode facilmente recuperar uma nova senha.</p>
+      <p class="login-box-msg">Você esqueceu sua senha? Aqui você pode facilmente criar uma nova senha.</p>
 
       <form action="email/email.php" method="post">
         <div class="input-group mb-3">

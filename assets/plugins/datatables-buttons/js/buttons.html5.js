@@ -799,7 +799,7 @@ DataTable.ext.buttons.copyHtml5 = {
 	className: 'buttons-copy buttons-html5',
 
 	text: function ( dt ) {
-		return dt.i18n( 'buttons.copy', 'Copy' );
+		return dt.i18n( 'buttons.copy', 'Copiar' );
 	},
 
 	action: function ( e, dt, button, config ) {
@@ -852,10 +852,10 @@ DataTable.ext.buttons.copyHtml5 = {
 
 				if (successful) {
 					dt.buttons.info(
-						dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ),
+						dt.i18n( 'buttons.copyTitle', 'Copiado na área de transferência' ),
 						dt.i18n( 'buttons.copySuccess', {
-							1: 'Copied one row to clipboard',
-							_: 'Copied %d rows to clipboard'
+							1: 'Copiado 1 linha para área de transferência',
+							_: 'Cpiado %d linhas para área de transferência'
 						}, exportData.rows ),
 						2000
 					);
@@ -874,7 +874,7 @@ DataTable.ext.buttons.copyHtml5 = {
 			)
 			.append( hiddenDiv );
 
-		dt.buttons.info( dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ), message, 0 );
+		dt.buttons.info( dt.i18n( 'buttons.copyTitle', 'Copiar para transferência' ), message, 0 );
 
 		// Select the text so when the user activates their system clipboard
 		// it will copy that text
